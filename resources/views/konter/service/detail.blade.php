@@ -9,6 +9,9 @@
             <!-- [ breadcrumb ] end -->
             <!-- [ Main Content ] start -->
             <div class="row">
+                <div class="col-12 mb-3">
+                    <a href="{{ url('/konter/service') }}" class="btn btn-secondary">Kembali</a>
+                </div>
                 <!-- subscribe start -->
                 <div class="col-md-12">
                     <div class="card">
@@ -16,40 +19,70 @@
                             <h5>{{ $title }}</h5>
                         </div>
                         <div class="card-body">
-                            <div class="row align-items-center m-l-0">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>Foto Service</td>
+                                    <td><img src="{{ $service->thumbnail == '' ? asset('img/no-image.jpg') : url(Storage::url($service->thumbnail)) }}"
+                                            alt="{{ $service->name }}" class="img-fluid img-avatar" width="100"></td>
+                                </tr>
+                                <tr>
+                                    <td>Nama Pelanggan</td>
+                                    <td>{{ $service->pelanggan->name }}<br>
+                                        <small class="text-muted">{{ $service->pelanggan->email }}</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Kode Service</td>
+                                    <td>{{ $service->code }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Layanan</td>
+                                    <td>{{ $service->layanan->layanan }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Service</td>
+                                    <td>{{ $service->date }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center ">
                                 <div class="col-sm-6">
+                                    <h5>Status</h5>
                                 </div>
                                 <div class="col-sm-6 text-right">
 
                                     <button type="button" class="btn btn-success btn-md mb-3 btn-round" data-toggle="modal"
-                                        data-target=".tambah"><i class="feather f-16 icon-plus"></i>
+                                        data-target=".tambah-status"><i class="feather f-16 icon-plus"></i>
                                         Tambah</button>
                                 </div>
                             </div>
+                        </div>
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped mb-0 lara-dataTable">
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Thumbnail</th>
-                                            <th>Code</th>
-                                            <th>Pelanggan</th>
-                                            <th>Layanan</th>
+                                            <th>Status</th>
                                             <th>Tanggal</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($service as $item)
+                                        @foreach ($status_service as $item)
                                             <tr>
                                                 <td width="10">{{ $loop->iteration }}</td>
                                                 <td width="150">
                                                     <div class="thumbnail">
                                                         <div class="thumb">
-                                                            <a href="{{ $item->thumbnail == '' ? asset('img/user.png') : url(Storage::url($item->thumbnail)) }}"
+                                                            <a href="{{ $item->thumbnail == '' ? asset('img/no-image.jpg') : url(Storage::url($item->thumbnail)) }}"
                                                                 data-lightbox="1" data-title="{{ $item->judul }}"
                                                                 data-toggle="lightbox">
-                                                                <img src="{{ $item->thumbnail == '' ? asset('img/user.png') : url(Storage::url($item->thumbnail)) }}"
+                                                                <img src="{{ $item->thumbnail == '' ? asset('img/no-image.jpg') : url(Storage::url($item->thumbnail)) }}"
                                                                     alt="{{ $item->name }}" class="img-fluid img-avatar"
                                                                     width="100">
                                                             </a>
@@ -57,30 +90,15 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href="" class="text-link">{{ $item->code }} <small><i
-                                                                data-feather="external-link"></i></small></a>
-                                                </td>
-                                                <td>
-                                                    {{ $item->pelanggan->name }}<br>
-                                                    <small class="text-muted">{{ $item->pelanggan->email }}</small>
-                                                </td>
-                                                <td>
-                                                    {{ $item->layanan->layanan }}
+                                                    {{ $item->status->status }}
                                                 </td>
                                                 <td>
                                                     {{ $item->date }}
                                                 </td>
-                                                <td width="200">
-                                                    <a href="{{ url('/konter/service/detail', $item->id) }}"
-                                                        class="btn btn-light-success btn-md"><i
-                                                            class="icon feather icon-eye f-16"></i> Status</a>
-                                                    <button type="button" class="btn btn-light-warning btn-md"
-                                                        data-toggle="modal" data-target=".edit-{{ $item->id }}"><i
-                                                            class="icon feather icon-edit f-16"></i>
-                                                        Edit</button>
-                                                    @include('konter.service.modal_edit')
+                                                <td width="50">
+
                                                     <form method="POST"
-                                                        action="{{ url('/konter/service/destroy', $item->id) }}"
+                                                        action="{{ url('/konter/service/destroyStatus', $item->id) }}"
                                                         class="d-inline-block">
                                                         @csrf
                                                         @method('DELETE')
@@ -98,10 +116,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- subscribe end -->
             </div>
-            <!-- [ Main Content ] end -->
         </div>
     </section>
-    @include('konter.service.modal_create')
+    @include('konter.service.modal_status')
 @endsection

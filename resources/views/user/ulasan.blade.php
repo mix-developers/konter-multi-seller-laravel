@@ -23,16 +23,44 @@
                             <strong>Ulasan Anda</strong>
                         </div>
                         <div class="card-body">
-
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Kode Service</th>
+                                        <th>Tanggal Klaim</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($service as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->code }}</td>
+                                            @php $finish = App\Models\ServiceFinished::where('id_service', $item->id); @endphp
+                                            @if ($finish->count() != 0)
+                                                <td>{{ $finish->date }}</td>
+                                                <td>
+                                                    @if ($finish->count() != 0)
+                                                        klaim
+                                                    @else
+                                                        <i class="fa fa-check text-success"></i>
+                                                    @endif
+                                                </td>
+                                            @else
+                                                <td colspan="2" class="text-center text-danger">Belum Selesai Pengerjaan
+                                                </td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    @include('pages.modal_produk')
 @endsection
 @section('script')
     <script type="text/javascript">

@@ -23,16 +23,47 @@
                             <strong>Status Service</strong>
                         </div>
                         <div class="card-body">
-
+                            <table class="table table-bordered">
+                                <thead>
+                                    <th>#</th>
+                                    <th>Kode Service</th>
+                                    <th>Tanggal Service</th>
+                                    <th>Status Service</th>
+                                    <th>Cek</th>
+                                    <th>Selesai</th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($service as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->code }}</td>
+                                            <td>{{ $item->date }}</td>
+                                            <td>{{ App\Models\ServiceStatus::getNotifStatus($item->id)->status->status }}
+                                            </td>
+                                            <td><a href="{{ url('/member/status', $item->code) }}"
+                                                    class="btn btn-info btn-sm">Cek</a></td>
+                                            </td>
+                                            <td class="text-center">
+                                                @if (App\Models\ServiceFinished::where('id_service', $item->id)->count() == 0)
+                                                    <form action="{{ url('/member/service/storeFinish') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id_service" value="{{ $item->id }}">
+                                                        <button type="submit" class="btn btn-success btn-sm">Klaim</button>
+                                                    </form>
+                                                @else
+                                                    <i class="fa fa-check text-success"></i>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    @include('pages.modal_produk')
 @endsection
 @section('script')
     <script type="text/javascript">

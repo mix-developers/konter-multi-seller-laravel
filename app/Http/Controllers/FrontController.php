@@ -7,6 +7,8 @@ use App\Models\Konter;
 use App\Models\Layanan;
 use App\Models\LayananKonter;
 use App\Models\Produk;
+use App\Models\Service;
+use App\Models\ServiceStatus;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -48,5 +50,19 @@ class FrontController extends Controller
             'kategori' => Kategori::all(),
         ];
         return view('pages.produk', $data);
+    }
+    public function service(Request $request)
+    {
+        $request->validate([
+            'keyword' => ['required', 'string', 'max:16', 'min:16']
+        ]);
+        $service = Service::where('code', 'like', '%' . $request->keyword . '%')->first();
+        $data = [
+            'title' => 'Kode service : ' . $request->keyword,
+            'service' => $service,
+            'keyword' => $request->keyword,
+            'status' => ServiceStatus::where('id_service', $service->id)->get(),
+        ];
+        return view('pages.service', $data);
     }
 }

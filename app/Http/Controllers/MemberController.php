@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
+use App\Models\ServiceFinished;
+use App\Models\ServiceStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +24,7 @@ class MemberController extends Controller
     {
         $data = [
             'title' => 'Ulasan Anda',
+            'service' => Service::getServiceUser(),
         ];
         return view('user.ulasan', $data);
     }
@@ -28,6 +32,7 @@ class MemberController extends Controller
     {
         $data = [
             'title' => 'Status Service',
+            'service' => Service::getServiceUser(),
         ];
         return view('user.status_service', $data);
     }
@@ -37,5 +42,18 @@ class MemberController extends Controller
             'title' => 'Ubah Password Anda',
         ];
         return view('user.ubah_password', $data);
+    }
+
+    public function status($code)
+    {
+
+        $service = Service::where('code', $code)->first();
+        $data = [
+            'title' => 'Kode service : ' . $service->code,
+            'service' => $service,
+            'keyword' => $service->code,
+            'status' => ServiceStatus::where('id_service', $service->id)->get(),
+        ];
+        return view('user.status', $data);
     }
 }

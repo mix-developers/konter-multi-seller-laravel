@@ -1,4 +1,4 @@
-<div class="modal fade tambah" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade tambah-status" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,35 +8,25 @@
             </div>
             <div class="modal-body">
 
-                <form method="POST" action="{{ url('/konter/service/store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ url('/konter/service/storeStatus') }}" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id_konter" value="{{ $konter->id }}">
-
+                    <input type="hidden" name="id_service" value="{{ $service->id }}">
                     <div class="form-group">
-                        <label for="name">Foto Device</label>
+                        <label for="name">Foto Status (opsional)</label>
                         <input type="file" class="form-control @error('thumbanil') is-invalid @enderror"
                             name="thumbnail">
                     </div>
                     <div class="form-group">
-                        <label for="layanan">Layanan</label>
-                        <select name="id_layanan" id="id_layanan" class="form-control">
-                            <option value="">--Pilih Layanan --</option>
-                            @foreach ($layanan_list as $list)
+                        <label for="layanan">Status</label>
+                        <select name="id_status" id="id_status" class="form-control">
+                            <option value="">--Pilih Status --</option>
+                            @foreach ($status as $list)
                                 <option value="{{ $list->id }}">
-                                    {{ $list->layanan->layanan }}</option>
+                                    {{ $list->status }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="layanan">Pelanggan</label>
-                        <select name="id_user" id="id_user" class="form-control">
-                            <option value="">--Pilih Pelanggan --</option>
-                            @foreach ($pelanggan as $list)
-                                <option value="{{ $list->id }}">
-                                    {{ $list->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+
                     <div class="form-group ">
                         <label>Deskripsi Produk</label>
                         <textarea class="ckeditor" name="description" id="description" cols="30" rows="4"></textarea>

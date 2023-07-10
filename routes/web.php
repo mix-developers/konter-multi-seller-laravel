@@ -27,6 +27,7 @@ Route::get('/', [FrontController::class, 'index']);
 Route::get('/konter_list', [FrontController::class, 'konter_list']);
 Route::get('/konter_detail/{slug}', [FrontController::class, 'konter_detail']);
 Route::get('/produk_list', [FrontController::class, 'produk_list']);
+Route::post('/service', [FrontController::class, 'service']);
 
 Auth::routes();
 
@@ -67,6 +68,12 @@ Route::group(['prefix' => 'konter', 'as' => 'konter', 'middleware' => ['konter']
     Route::delete('produk/destroy/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
     Route::get('laporan', [LaporanController::class, 'konter'])->name('laporan');
     Route::get('service', [ServiceController::class, 'index'])->name('service');
+    Route::get('service/detail/{id}', [ServiceController::class, 'detail'])->name('service.detail');
+    Route::post('service/store', [ServiceController::class, 'store'])->name('service.store');
+    Route::post('service/storeStatus', [ServiceController::class, 'storeStatus'])->name('service.storeStatus');
+    Route::put('service/update/{id}', [ServiceController::class, 'update'])->name('service.update');
+    Route::delete('service/destroy/{id}', [ServiceController::class, 'destroy'])->name('service.destroy');
+    Route::delete('service/destroyStatus/{id}', [ServiceController::class, 'destroyStatus'])->name('service.destroyStatus');
 });
 Route::group(['prefix' => 'member', 'as' => 'konter', 'middleware' => ['user']], function () {
     // index user
@@ -74,4 +81,7 @@ Route::group(['prefix' => 'member', 'as' => 'konter', 'middleware' => ['user']],
     Route::get('/ulasan', [App\Http\Controllers\MemberController::class, 'ulasan'])->name('ulasan');
     Route::get('/status_service', [App\Http\Controllers\MemberController::class, 'status_service'])->name('status_service');
     Route::get('/ubah_password', [App\Http\Controllers\MemberController::class, 'ubah_password'])->name('ubah_password');
+    Route::get('/status/{code}', [App\Http\Controllers\MemberController::class, 'status'])->name('status');
+    Route::post('service/storeFinish', [ServiceController::class, 'storeFinish'])->name('service.storeFinish');
+    Route::post('service/storeRating', [ServiceController::class, 'storeRating'])->name('service.storeRating');
 });

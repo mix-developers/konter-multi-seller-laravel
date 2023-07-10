@@ -1,7 +1,25 @@
 @extends('layouts.frontend.app')
 @section('content')
     @include('layouts.frontend.slider')
-
+    <div class="container" style="margin-top: 100px">
+        <div class=" text-center justify-content-center p-3 border border-secondary " style="border-radius:20px;">
+            <form action="{{ url('/service') }}" method="POST">
+                @csrf
+                <div class="row ">
+                    <div class="col-9">
+                        <input type="text" class="form-control @if ($errors->has('keyword')) is-invalid @endif"
+                            name="keyword" style="border-radius:10px;" placeholder="Tulis Kode service anda di sini">
+                        @if ($errors->has('keyword'))
+                            <small class="text-danger">*Kode service salah, mohon cek kembali kode service anda</small>
+                        @endif
+                    </div>
+                    <div class="col-3 ">
+                        <button type="submit" class="btn btn-info"><i class="fa fa-search"></i> Cek Code Service</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <!--team section-->
     <section class="team-section section">
         <div class="container text-center">
@@ -12,7 +30,8 @@
                 @foreach ($produk as $item)
                     <div class="col-lg-4 col-md-6">
                         <div class="team-member">
-                            <img loading="lazy" src="{{ asset('/') }}img/leptop.png" alt="leptop" class="img-fluid p-3">
+                            <img loading="lazy" src="{{ asset('/') }}img/leptop.png" alt="leptop"
+                                class="img-fluid p-3">
                             <div class="contents ">
                                 <b
                                     class="p-2  text-white {{ $item->status == 'Tersedia' ? 'bg-info' : 'bg-danger' }}">{{ $item->status }}</b>

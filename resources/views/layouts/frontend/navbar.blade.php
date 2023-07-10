@@ -39,7 +39,7 @@
                                 </li>
                                 <li class="">
                                     <a class="btn btn-outline-info" href="{{ url('/member') }}">
-                                        {{ Auth::user()->name }}</a>
+                                        Akun saya</a>
                                 </li>
                             @endif
                             <li class="">

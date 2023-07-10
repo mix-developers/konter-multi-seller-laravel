@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="author" content="Themefisher">
     <meta name="generator" content="Themefisher Medical HTML Template v1.0">
-
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     <!-- theme meta -->
     <meta name="theme-name" content="medic" />
 
@@ -38,7 +38,7 @@
     <link href="{{ asset('frontend_theme/') }}/css/style.css" rel="stylesheet">
 
     <!--Favicon-->
-    <link rel="icon" href="{{ asset('/img/favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('/img/icon.png') }}" type="image/x-icon">
     @yield('css')
 </head>
 

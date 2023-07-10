@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class Service extends Model
 {
@@ -24,5 +25,15 @@ class Service extends Model
     public static function getAll()
     {
         return self::with(['pelanggan', 'layanan', 'konter'])->get();
+    }
+    public static function getNotif()
+    {
+        return self::with(['pelanggan', 'layanan', 'konter'])->where('id_user', Auth::user()->id)
+            ->take(3)
+            ->get();
+    }
+    public static function getServiceUser()
+    {
+        return self::with(['pelanggan', 'layanan', 'konter'])->where('id_user', Auth::user()->id)->get();
     }
 }

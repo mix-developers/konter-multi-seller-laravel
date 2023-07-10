@@ -9,53 +9,37 @@
             </div>
             <div class="modal-body">
 
-                <form method="POST" action="{{ url('/konter/produk/update', $item->id) }}"
+                <form method="POST" action="{{ url('/konter/service/update', $item->id) }}"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="id_konter" value="{{ $konter->id }}">
+
                     <div class="form-group">
-                        <label for="name">Foto Produk</label>
+                        <label for="name">Foto Device</label>
                         <input type="file" class="form-control @error('thumbanil') is-invalid @enderror"
                             name="thumbnail">
                     </div>
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="form-group">
-                                <label for="name">Nama Produk</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{ $item->name }}">
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="Tersedia" {{ $item->status == 'Tersedia' ? 'selected' : '' }}>
-                                        Tersedia
-                                    </option>
-                                    <option value="Habis" {{ $item->status == 'Habis' ? 'selected' : '' }}>Habis
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="layanan">Layanan</label>
+                        <select name="id_layanan" id="id_layanan" class="form-control">
+                            <option value="">--Pilih Layanan --</option>
+                            @foreach ($layanan_list as $list)
+                                <option value="{{ $list->id_layanan }}"
+                                    {{ $list->id_layanan == $item->id_layanan ? 'selected' : '' }}>
+                                    {{ $list->layanan->layanan }}</option>
+                            @endforeach
+                        </select>
                     </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="price">Harga Produk</label>
-                                <input type="number" class="form-control @error('price') is-invalid @enderror"
-                                    name="price" value="{{ $item->price }}">
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="stok">Stok Produk</label>
-                                <input type="text" class="form-control @error('stok') is-invalid @enderror"
-                                    name="stok" value="{{ $item->stok }}">
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="layanan">Pelanggan</label>
+                        <select name="id_user" id="id_user" class="form-control">
+                            <option value="">--Pilih Pelanggan --</option>
+                            @foreach ($pelanggan as $list)
+                                <option value="{{ $list->id }}" {{ $list->id == $item->id_user ? 'selected' : '' }}>
+                                    {{ $list->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group ">
                         <label>Deskripsi Produk</label>

@@ -37,8 +37,6 @@
             </div>
         </div>
     </section>
-
-    @include('pages.modal_produk')
 @endsection
 @section('script')
     <script type="text/javascript">
