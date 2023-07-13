@@ -146,7 +146,7 @@
                             <div class=" dropdown-header">
                                 <h6 class="text-overflow m-0">Welcome !</h6>
                             </div>
-                            <a href="{{ url('dashboard.akun') }}" class="dropdown-item">
+                            <a href="{{ url('konter/user/akun') }}" class="dropdown-item">
                                 <i data-feather="user"></i>
                                 <span>Akun</span>
                             </a>

@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Twilio\Rest\Client;
 
 class ServiceController extends Controller
 {
@@ -32,11 +33,15 @@ class ServiceController extends Controller
     }
     public function detail($id)
     {
-        $service = Service::find($id);
+        $konter = Konter::where('id_pemilik', Auth::user()->id)->first();
+        $service = Service::where('id', $id)->withTrashed()->first();
+        $user = User::find($service->id_user);
         $data = [
             'title' => 'Detail Service',
             'service' => $service,
             'status' => Status::all(),
+            'user' => $user,
+            'konter' => $konter,
             'status_service' => ServiceStatus::where('id_service', $service->id)->get(),
         ];
         return view('konter.service.detail', $data);
@@ -75,6 +80,7 @@ class ServiceController extends Controller
         $request->validate([
             'id_service' => ['required'],
             'id_status' => ['required'],
+            'number' => ['required'],
 
         ]);
         if ($request->hasFile('thumbnail')) {
@@ -94,6 +100,17 @@ class ServiceController extends Controller
             return redirect()->back()->with('danger', 'Gagal menambahkan status');
         }
     }
+    // private function whatsappNotification(string $recipient)
+    // {
+    //     $sid    = getenv("TWILIO_AUTH_SID");
+    //     $token  = getenv("TWILIO_AUTH_TOKEN");
+    //     $wa_from = getenv("TWILIO_WHATSAPP_FROM");
+    //     $twilio = new Client($sid, $token);
+
+    //     $body = "Hello, welcome to codelapan.com.";
+
+    //     return $twilio->messages->create("whatsapp:$recipient", ["from" => "whatsapp:$wa_from", "body" => $body]);
+    // }
     public function storeFinish(Request $request)
     {
         $request->validate([
@@ -166,9 +183,9 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         $service = Service::find($id);
-        if ($service->thumbnail != '') {
-            Storage::delete($service->thumbnail);
-        }
+        // if ($service->thumbnail != '') {
+        //     Storage::delete($service->thumbnail);
+        // }
         $service->delete();
         return redirect()->back()->with('success', 'Berhasil menghapus data');
     }

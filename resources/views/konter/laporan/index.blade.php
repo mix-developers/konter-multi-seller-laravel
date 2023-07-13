@@ -1,3 +1,6 @@
+@push('css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endpush
 @extends('layouts.backand.admin')
 
 @section('content')
@@ -16,46 +19,31 @@
                             <h5>{{ $title }}</h5>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped mb-0 lara-dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Thumbnail</th>
-                                            <th>Nama Produk</th>
-                                            <th>Konter</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($produk as $item)
-                                            <tr>
-                                                <td width="10">{{ $loop->iteration }}</td>
-                                                <td width="150">
-                                                    <div class="thumbnail">
-                                                        <div class="thumb">
-                                                            <a href="{{ $item->thumnail == '' ? asset('img/user.png') : url(Storage::url($item->thumnail)) }}"
-                                                                data-lightbox="1" data-title="{{ $item->judul }}"
-                                                                data-toggle="lightbox">
-                                                                <img src="{{ $item->thumnail == '' ? asset('img/user.png') : url(Storage::url($item->thumnail)) }}"
-                                                                    alt="{{ $item->name }}" class="img-fluid img-thumnail"
-                                                                    width="50">
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    {{ $item->name }}<br>
-                                                    <p class="text-muted">{{ $item->price }}</p>
-                                                </td>
-                                                <td>
-                                                    {{ $item->konter->name }}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link text-uppercase active" id="service-tab" data-toggle="tab"
+                                        href="#service" role="tab" aria-controls="service"
+                                        aria-selected="true">service</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-uppercase" id="produk-tab" data-toggle="tab" href="#produk"
+                                        role="tab" aria-controls="produk" aria-selected="false">produk</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="service" role="tabpanel"
+                                    aria-labelledby="service-tab">
+
+                                    @include('konter.laporan._range_service')
+                                    @include('konter.laporan._service')
+                                </div>
+                                <div class="tab-pane fade" id="produk" role="tabpanel" aria-labelledby="produk-tab">
+                                    @include('konter.laporan._range_produk')
+                                    @include('konter.laporan._produks')
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <!-- subscribe end -->
@@ -64,3 +52,9 @@
         </div>
     </section>
 @endsection
+@push('js')
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("input[type=date]");
+    </script>
+@endpush

@@ -1,3 +1,112 @@
+@section('css')
+    <style>
+        .rate {
+            float: left;
+        }
+
+        .rate:not(:checked)>input {
+            position: absolute;
+            display: none;
+        }
+
+        .rate:not(:checked)>label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+
+        .rated:not(:checked)>label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+
+        .rate:not(:checked)>label:before {
+            content: '★ ';
+        }
+
+        .rate>input:checked~label {
+            color: #ffc700;
+        }
+
+        .rate:not(:checked)>label:hover,
+        .rate:not(:checked)>label:hover~label {
+            color: #deb217;
+        }
+
+        .rate>input:checked+label:hover,
+        .rate>input:checked+label:hover~label,
+        .rate>input:checked~label:hover,
+        .rate>input:checked~label:hover~label,
+        .rate>label:hover~input:checked~label {
+            color: #c59b08;
+        }
+
+        .star-rating-complete {
+            color: #c59b08;
+        }
+
+        .rating-container .form-control:hover,
+        .rating-container .form-control:focus {
+            background: #fff;
+            border: 1px solid #ced4da;
+        }
+
+        .rating-container textarea:focus,
+        .rating-container input:focus {
+            color: #000;
+        }
+
+        .rated {
+            float: left;
+
+        }
+
+        .rated:not(:checked)>input {
+            position: absolute;
+            display: none;
+        }
+
+        .rated:not(:checked)>label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ffc700;
+        }
+
+        .rated:not(:checked)>label:before {
+            content: '★ ';
+        }
+
+        .rated>input:checked~label {
+            color: #ffc700;
+        }
+
+        .rated:not(:checked)>label:hover,
+        .rated:not(:checked)>label:hover~label {
+            color: #deb217;
+        }
+
+        .rated>input:checked+label:hover,
+        .rated>input:checked+label:hover~label,
+        .rated>input:checked~label:hover,
+        .rated>input:checked~label:hover~label,
+        .rated>label:hover~input:checked~label {
+            color: #c59b08;
+        }
+    </style>
+@endsection
 @extends('layouts.frontend.app')
 @section('content')
     <!--team section-->
@@ -18,8 +127,9 @@
                             @foreach ($produk as $item)
                                 <div class="col-lg-6 col-md-6">
                                     <div class="team-member">
-                                        <img loading="lazy" src="{{ asset('/') }}img/leptop.png" alt="leptop"
-                                            class="img-fluid p-3">
+                                        <img loading="lazy"
+                                            src="{{ $item->thumbnail == '' ? asset('img/no-image.jpg') : url(Storage::url($item->thumbnail)) }}"
+                                            alt="leptop" class="img-fluid p-3" style="height: 90%;">
                                         <div class="contents ">
                                             <b
                                                 class="p-2  text-white {{ $item->status == 'Tersedia' ? 'bg-info' : 'bg-danger' }}">{{ $item->status }}</b>
@@ -38,6 +148,29 @@
                             @endforeach
 
                         </div>
+                        <div class="mt-4">
+                            <hr>
+                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="pills-rating-tab" data-toggle="pill" href="#pills-rating"
+                                        role="tab" aria-controls="pills-rating" aria-selected="true">Rating dan
+                                        Ulasan</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-chat-tab" data-toggle="pill" href="#pills-chat"
+                                        role="tab" aria-controls="pills-chat" aria-selected="false">Chat Konter</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-rating" role="tabpanel"
+                                    aria-labelledby="pills-rating-tab">
+                                    @include('pages.tab-toko.toko-rating')
+                                </div>
+                                <div class="tab-pane fade" id="pills-chat" role="tabpanel" aria-labelledby="pills-chat-tab">
+                                    @include('pages.tab-toko.toko-chat')
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <div class="right-side">
@@ -49,6 +182,8 @@
                                 <ul class="categorise-list">
                                     <li><a href="#"><strong>Nama Konter : </strong>{{ $konter->name }} </a></li>
                                     <li><a href="#"><strong>Pemilik Konter : </strong>{{ $konter->pemilik->name }}
+                                        </a>
+                                    <li><a href="#"><strong>Nomor Konter : </strong>{{ $konter->pemilik->phone }}
                                         </a>
                                     </li>
                                     <li><a href="#"><strong>Alamat Konter : </strong>{{ $konter->address }} </a>
@@ -65,7 +200,8 @@
                                 <ul class="categorise-list">
                                     @foreach ($layanan as $list)
                                         <li> <a href="#"><i class="fa fa-angle-right text-info"></i>
-                                                {{ $list->layanan->layanan }}</a></li>
+                                                {{ $list->layanan->layanan }}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>

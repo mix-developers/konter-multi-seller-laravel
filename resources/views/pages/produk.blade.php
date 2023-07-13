@@ -13,8 +13,9 @@
                         @foreach ($produk as $item)
                             <div class="col-lg-6 col-md-6">
                                 <div class="team-member">
-                                    <img loading="lazy" src="{{ asset('/') }}img/leptop.png" alt="leptop"
-                                        class="img-fluid p-3">
+                                    <img loading="lazy"
+                                        src="{{ $item->thumbnail == '' ? asset('img/no-image.jpg') : url(Storage::url($item->thumbnail)) }}"
+                                        alt="leptop" class="img-fluid p-3" style="height: 90%;">
                                     <div class="contents ">
                                         <b
                                             class="p-2  text-white {{ $item->status == 'Tersedia' ? 'bg-info' : 'bg-danger' }}">{{ $item->status }}</b>
@@ -53,7 +54,8 @@
                             </div>
                             <ul class="categorise-list">
                                 @foreach ($kategori as $list)
-                                    <li><a href="blog.html">{{ $list->kategori }} <span>(20)</span></a></li>
+                                    <li><a href="{{ url('/') }}">{{ $list->kategori }}
+                                            <span>({{ App\Models\Produk::getCountKategori($list->id) }})</span></a></li>
                                 @endforeach
                             </ul>
                         </div>

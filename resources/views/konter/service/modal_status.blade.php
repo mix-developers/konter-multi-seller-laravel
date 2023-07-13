@@ -11,6 +11,7 @@
                 <form method="POST" action="{{ url('/konter/service/storeStatus') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id_service" value="{{ $service->id }}">
+                    <input type="hidden" name="number" value="{{ $user->phone }}">
                     <div class="form-group">
                         <label for="name">Foto Status (opsional)</label>
                         <input type="file" class="form-control @error('thumbanil') is-invalid @enderror"

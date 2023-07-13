@@ -31,6 +31,10 @@
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control " name="email" value="{{ $user->email }}">
                             </div>
+                            <div class="form-group">
+                                <label for="phone">Nomor HP</label>
+                                <input type="text" class="form-control " name="phone" value="{{ $user->phone }}">
+                            </div>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-info">Simpan Perubahan</button>

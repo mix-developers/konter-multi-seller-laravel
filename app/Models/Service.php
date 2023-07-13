@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Service extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     public function pelanggan(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id_user');
@@ -24,11 +26,17 @@ class Service extends Model
     }
     public static function getAll()
     {
-        return self::with(['pelanggan', 'layanan', 'konter'])->get();
+        return self::with(['pelanggan', 'layanan', 'konter'])->withTrashed()->get();
     }
     public static function getNotif()
     {
+
         return self::with(['pelanggan', 'layanan', 'konter'])->where('id_user', Auth::user()->id)
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('service_finished')
+                    ->whereRaw('id_service');
+            })
             ->take(3)
             ->get();
     }

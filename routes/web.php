@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KonterController;
 use App\Http\Controllers\KonterTokoController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LayananKonterController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\PusherController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StatusController;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +31,10 @@ Route::get('/konter_list', [FrontController::class, 'konter_list']);
 Route::get('/konter_detail/{slug}', [FrontController::class, 'konter_detail']);
 Route::get('/produk_list', [FrontController::class, 'produk_list']);
 Route::post('/service', [FrontController::class, 'service']);
+Route::get('/chat', [PusherController::class, 'index']);
+Route::post('/broadcast', 'App\http\Controllers\PusherController@broadcast');
+Route::post('/receive', 'App\http\Controllers\PusherController@receive');
+Route::get('/status/{code}', [App\Http\Controllers\MemberController::class, 'status'])->name('status');
 
 Auth::routes();
 
@@ -36,6 +43,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/akun/admin', [App\Http\Controllers\UserController::class, 'admin'])->name('akun.admin');
     Route::get('/akun/konter', [App\Http\Controllers\UserController::class, 'konter'])->name('akun.konter');
+    Route::get('/akun/akun', [App\Http\Controllers\UserController::class, 'akunAdmin'])->name('akun.akun');
     Route::get('produk', [ProdukController::class, 'index'])->name('produk');
     Route::get('konter', [KonterTokoController::class, 'index'])->name('konter');
     Route::post('konter/store', [KonterTokoController::class, 'store'])->name('konter.store');
@@ -74,6 +82,10 @@ Route::group(['prefix' => 'konter', 'as' => 'konter', 'middleware' => ['konter']
     Route::put('service/update/{id}', [ServiceController::class, 'update'])->name('service.update');
     Route::delete('service/destroy/{id}', [ServiceController::class, 'destroy'])->name('service.destroy');
     Route::delete('service/destroyStatus/{id}', [ServiceController::class, 'destroyStatus'])->name('service.destroyStatus');
+    Route::get('user/akun', [App\Http\Controllers\UserController::class, 'akunKonter'])->name('konter.user.akun');
+    Route::get('ulasan', [KonterController::class, 'ulasan'])->name('ulasan');
+    Route::post('laporan/exportService', [LaporanController::class, 'exportService'])->name('laporan.exportService');
+    Route::get('laporan/exportProduk', [LaporanController::class, 'exportProduk'])->name('laporan.exportProduk');
 });
 Route::group(['prefix' => 'member', 'as' => 'konter', 'middleware' => ['user']], function () {
     // index user
@@ -84,4 +96,5 @@ Route::group(['prefix' => 'member', 'as' => 'konter', 'middleware' => ['user']],
     Route::get('/status/{code}', [App\Http\Controllers\MemberController::class, 'status'])->name('status');
     Route::post('service/storeFinish', [ServiceController::class, 'storeFinish'])->name('service.storeFinish');
     Route::post('service/storeRating', [ServiceController::class, 'storeRating'])->name('service.storeRating');
+    Route::post('/sendChat', [MemberController::class, 'sendChat'])->name('sendChat');
 });

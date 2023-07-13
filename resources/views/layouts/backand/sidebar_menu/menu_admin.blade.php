@@ -56,6 +56,9 @@
         <li class="pc-item"><a href="{{ url('/konter/service') }}" class="pc-link "><span class="pc-micon"><i
                         data-feather="life-buoy"></i></span><span class="pc-mtext">Service</span></a>
         </li>
+        <li class="pc-item"><a href="{{ url('/konter/ulasan') }}" class="pc-link "><span class="pc-micon"><i
+                        data-feather="star"></i></span><span class="pc-mtext">Rating dan Ulasan</span></a>
+        </li>
         <li class="pc-item pc-caption">
             <label>Laporan</label>
         </li>

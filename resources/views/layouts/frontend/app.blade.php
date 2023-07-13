@@ -2,4 +2,9 @@
 @include('layouts.frontend.navbar')
 @yield('content')
 @include('layouts.frontend.footer')
-@include('layouts.frontend.modal_notif')
+@guest
+@else
+    @if (Auth::user()->role == 'user')
+        @include('layouts.frontend.modal_notif')
+    @endif
+@endguest

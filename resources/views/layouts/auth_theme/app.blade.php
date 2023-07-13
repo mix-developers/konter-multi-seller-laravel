@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Login | Si Waneen</title>
+    <title>Authentication | SimVice</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -13,7 +13,7 @@
     <meta name="author" content="Phoenixcoded" />
 
     <!-- Favicon icon -->
-    <link rel="icon" href="{{ asset('frontand_theme/') }}/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="{{ asset('/') }}img/icon.png" type="image/x-icon">
 
     <!-- font css -->
     <link rel="stylesheet" href="{{ asset('backand_theme/assets') }}/fonts/font-awsome-pro/css/pro.min.css">

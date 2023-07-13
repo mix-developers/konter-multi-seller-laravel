@@ -82,7 +82,7 @@
 
                                     <button type="button" class="btn btn-main" data-toggle="modal"
                                         data-target="#toko-{{ $item->slug }}">
-                                        Detail Toko
+                                        Detail Konter
                                     </button>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                 @endforeach
 
             </div>
-            <a href="{{ url('/konter_list') }}" class="btn btn-style-one mt-4">Lihat Semua Toko</a>
+            <a href="{{ url('/konter_list') }}" class="btn btn-style-one mt-4">Lihat Semua Konter</a>
         </div>
     </section>
     <!--End team section-->

@@ -41,15 +41,15 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($service as $item)
-                                            <tr>
+                                            <tr class="@if ($item->deleted_at != null) table-warning @endif">
                                                 <td width="10">{{ $loop->iteration }}</td>
                                                 <td width="150">
                                                     <div class="thumbnail">
                                                         <div class="thumb">
-                                                            <a href="{{ $item->thumbnail == '' ? asset('img/user.png') : url(Storage::url($item->thumbnail)) }}"
-                                                                data-lightbox="1" data-title="{{ $item->judul }}"
+                                                            <a href="{{ $item->thumbnail == '' ? asset('img/no-image.jpg') : url(Storage::url($item->thumbnail)) }}"
+                                                                data-lightbox="1" data-title="{{ $item->name }}"
                                                                 data-toggle="lightbox">
-                                                                <img src="{{ $item->thumbnail == '' ? asset('img/user.png') : url(Storage::url($item->thumbnail)) }}"
+                                                                <img src="{{ $item->thumbnail == '' ? asset('img/no-image.jpg') : url(Storage::url($item->thumbnail)) }}"
                                                                     alt="{{ $item->name }}" class="img-fluid img-avatar"
                                                                     width="100">
                                                             </a>
@@ -74,12 +74,14 @@
                                                     <a href="{{ url('/konter/service/detail', $item->id) }}"
                                                         class="btn btn-light-success btn-md"><i
                                                             class="icon feather icon-eye f-16"></i> Status</a>
-                                                    <button type="button" class="btn btn-light-warning btn-md"
-                                                        data-toggle="modal" data-target=".edit-{{ $item->id }}"><i
-                                                            class="icon feather icon-edit f-16"></i>
-                                                        Edit</button>
-                                                    @include('konter.service.modal_edit')
-                                                    <form method="POST"
+                                                    @if ($item->deleted_at == null)
+                                                        <button type="button" class="btn btn-light-warning btn-md"
+                                                            data-toggle="modal" data-target=".edit-{{ $item->id }}"><i
+                                                                class="icon feather icon-edit f-16"></i>
+                                                            Edit</button>
+                                                        @include('konter.service.modal_edit')
+                                                    @endif
+                                                    {{-- <form method="POST"
                                                         action="{{ url('/konter/service/destroy', $item->id) }}"
                                                         class="d-inline-block">
                                                         @csrf
@@ -88,7 +90,7 @@
                                                             class="btn btn-light-danger btn-md delete-button"><i
                                                                 class="feather icon-trash-2  f-16 "></i> Delete
                                                         </button>
-                                                    </form>
+                                                    </form> --}}
                                                 </td>
                                             </tr>
                                         @endforeach

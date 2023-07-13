@@ -37,6 +37,7 @@
     <!-- Stylesheets -->
     <link href="{{ asset('frontend_theme/') }}/css/style.css" rel="stylesheet">
 
+
     <!--Favicon-->
     <link rel="icon" href="{{ asset('/img/icon.png') }}" type="image/x-icon">
     @yield('css')

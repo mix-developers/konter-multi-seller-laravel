@@ -16,6 +16,10 @@ class ServiceStatus extends Model
     {
         return $this->belongsTo(status::class, 'id_status');
     }
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class, 'id_service')->withTrashed();
+    }
 
     public static function getNotifStatus($id_service)
     {

@@ -12,7 +12,7 @@
                             <div class="card-body">
                                 {{-- <img src="{{ asset('frontand_theme/') }}/images/favicon.png" alt=""
                                     class="img-fluid mb-4"> --}}
-                                <h1><a href="{{ url('/') }}" class="text-primary">E-KONTER</a></h1>
+                                <h1><a href="{{ url('/') }}" class="text-primary">SimVice</a></h1>
                                 <h4 class="mb-3 mt-2 f-w-400">Sign in</h4>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">

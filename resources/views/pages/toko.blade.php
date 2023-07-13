@@ -16,18 +16,17 @@
                             <div class="contents text-center">
                                 <h4>{{ $item->name }}</h4>
                                 <div class="ratings">
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star"></i>
+                                    @php $rating = App\Models\ReviewRating::getKonterRating($item->id) @endphp
+                                    @for ($i = 1; $i <= $rating; $i++)
+                                        <i class="fa fa-star text-warning"></i>
+                                    @endfor
                                 </div>
-                                <small>12 Reviews</small>
+                                <small>{{ App\Models\ReviewRating::getKonterCount($item->id) }} Ulasan</small>
                                 <div class="mt-3">
 
                                     <button type="button" class="btn btn-main" data-toggle="modal"
                                         data-target="#toko-{{ $item->slug }}">
-                                        Detail Toko
+                                        Detail Konter
                                     </button>
                                 </div>
                             </div>

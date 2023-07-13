@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chat;
+use App\Models\ReviewRating;
 use App\Models\Service;
 use App\Models\ServiceFinished;
 use App\Models\ServiceStatus;
@@ -24,7 +26,7 @@ class MemberController extends Controller
     {
         $data = [
             'title' => 'Ulasan Anda',
-            'service' => Service::getServiceUser(),
+            'rating' => ReviewRating::where('id_user', Auth::user()->id)->get(),
         ];
         return view('user.ulasan', $data);
     }
@@ -55,5 +57,26 @@ class MemberController extends Controller
             'status' => ServiceStatus::where('id_service', $service->id)->get(),
         ];
         return view('user.status', $data);
+    }
+    public function sendChat(Request $request)
+    {
+        $request->validate([
+            'from_user' => ['required'],
+            'id_konter' => ['required'],
+            'to_user' => ['required'],
+            'content' => ['required'],
+        ]);
+
+        $chat = new Chat();
+        $chat->from_user = $request->from_user;
+        $chat->id_konter = $request->id_konter;
+        $chat->to_user = $request->to_user;
+        $chat->content = $request->content;
+
+        if ($chat->save()) {
+            return redirect()->back()->with('success', 'Berhasil memberikan rating dan ulasan');
+        } else {
+            return redirect()->back()->with('danger', 'Gagal memberikan rating dan ulasan');
+        }
     }
 }

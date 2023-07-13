@@ -11,7 +11,7 @@
                     </button>
                 </div>
                 <div class="modal-body ">
-                    <p class="p-2 border border-secondary shadow-sm rounded"><strong class="text-info">Nama Toko :
+                    <p class="p-2 border border-secondary shadow-sm rounded"><strong class="text-info">Nama Konter :
                         </strong>
                         {{ $item->name }}
                     </p>

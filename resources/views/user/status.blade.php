@@ -116,9 +116,10 @@
     <section class="team-section section">
         <div class="container ">
             <div class="section-title text-center">
-
-                <h3><a href="{{ url('/member/status_service') }}" class="btn btn-secondary mr-4">Kembali</a>
-                    {{ $title }}</h3>
+                @if (Auth::user()->role == 'user')
+                    <h3><a href="{{ url('/member/status_service') }}" class="btn btn-secondary mr-4">Kembali</a>
+                        {{ $title }}</h3>
+                @endif
                 <hr>
                 @if (App\Models\ServiceFinished::where('id_service', $service->id)->count() != 0)
                     <div class="alert alert-success" role="alert">
@@ -220,22 +221,16 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col mt-4">
-                                                    <div class="form-group row">
-                                                        <input type="hidden" name="booking_id"
-                                                            value="{{ $rating->id }}">
-                                                        <div class="col">
-                                                            <div class="rated">
-                                                                @for ($i = 1; $i <= $rating->star_rating; $i++)
-                                                                    <label class="star-rating-complete"
-                                                                        title="text">{{ $i }}
-                                                                        stars</label>
-                                                                @endfor
-                                                            </div>
+                                                    <div class="form-group ">
+                                                        <div class="ratings text-center">
+                                                            @for ($i = 1; $i <= $rating->star_rating; $i++)
+                                                                <i class="fa fa-star text-warning h1"></i>
+                                                            @endfor
                                                         </div>
                                                     </div>
                                                     <div class="form-group row mt-4">
                                                         <div class="col">
-                                                            <p>{{ $rating->comments }}</p>
+                                                            <p>" {{ $rating->comments }} "</p>
                                                         </div>
                                                     </div>
                                                 </div>
