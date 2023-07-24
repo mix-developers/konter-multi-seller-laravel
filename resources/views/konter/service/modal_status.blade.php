@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title h4" id="myLargeModalLabel">Tambah Konter</h5>
+                <h5 class="modal-title h4" id="myLargeModalLabel">Tambah Status Service</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -32,6 +32,36 @@
                         <label>Deskripsi Produk</label>
                         <textarea class="ckeditor" name="description" id="description" cols="30" rows="4"></textarea>
                     </div>
+                    <button type="submit" class="btn  btn-primary">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade tambah-price" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="myLargeModalLabel">Tambah Price</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="POST" action="{{ url('/konter/service/storePrice') }}" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="id_service" value="{{ $service->id }}">
+
+                    <div class="form-group ">
+                        <label>Nama</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
+                    </div>
+                    <div class="form-group ">
+                        <label>Harga</label>
+                        <input type="text" class="form-control @error('price') is-invalid @enderror" name="price">
+                    </div>
+
                     <button type="submit" class="btn  btn-primary">Simpan</button>
                 </form>
             </div>

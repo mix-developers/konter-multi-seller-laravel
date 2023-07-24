@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta name="google-site-verification" content="6jNOWiRzFMuuJFQ6w3XHfUgQddz7uIVo3w4A9TnsI7s" />
+    {{-- <meta name="google-site-verification" content="6jNOWiRzFMuuJFQ6w3XHfUgQddz7uIVo3w4A9TnsI7s" /> --}}
     <title>{{ $title ?? env('APP_NAME') }} | SimVice</title>
     <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,7 +24,7 @@
 
     <link rel="stylesheet" href="{{ asset('backand_theme') }}/assets/css/plugins/animate.min.css">
     <link rel="stylesheet" href="{{ asset('backand_theme') }}/assets/css/plugins/dataTables.bootstrap4.min.css">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     @stack('css')
 
     <!-- font css -->
@@ -127,10 +127,18 @@
             </div>
             <div class="mr-auto pc-mob-drp">
                 <ul class="list-unstyled">
+
                 </ul>
             </div>
             <div class="ml-auto">
                 <ul class="list-unstyled">
+                    <li class="pc-h-item">
+                        <a class="pc-head-link mr-0" href="#" data-toggle="modal"
+                            data-target="#notification-modal">
+                            <i data-feather="message-circle" class="text-primary"></i>
+                            <span class="badge badge-danger pc-h-badge dots"><span class="sr-only"></span></span>
+                        </a>
+                    </li>
 
                     <li class="dropdown pc-h-item">
                         <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#"
@@ -171,7 +179,46 @@
 
     <!-- Modal -->
 
+    <div class="modal notification-modal fade " id="notification-modal" tabindex="-1" role="dialog"
+        aria-modal="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <ul class="nav nav-pill tabs-light mb-3" id="pc-noti-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pc-noti-home-tab" data-toggle="pill" href="#pc-noti-home"
+                                role="tab" aria-controls="pc-noti-home" aria-selected="true">Chat Pelanggan</a>
 
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/konter/chat') }}" class="nav-link">Lihat Chat</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content pt-4" id="pc-noti-tabContent">
+                        <div class="tab-pane fade show active" id="pc-noti-home" role="tabpanel"
+                            aria-labelledby="pc-noti-home-tab">
+                            @foreach (App\Models\Chat::getNotification(Auth::user()->id) as $item)
+                                <div class="media">
+                                    <img src="{{ $item->user_from->avatar == '' ? asset('img/user.png') : url(Storage::url($item->user_from->avatar)) }}"
+                                        alt="user-image" class="img-fluid avtar avtar-l">
+                                    <div class="media-body ml-3 align-self-center">
+                                        <h6 class="mb-0 d-inline-block">{{ $item->user_from->name }}</h6>
+                                        <p class="mb-0 d-inline-block f-12 text-muted"> • {{ $item->created_at }} </p>
+                                        <p class="my-3">{{ $item->content }}</p>
+
+                                    </div>
+                                </div>
+                                <hr class="mb-4">
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- [ Header ] end -->
 

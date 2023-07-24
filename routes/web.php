@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KonterController;
@@ -79,11 +80,13 @@ Route::group(['prefix' => 'konter', 'as' => 'konter', 'middleware' => ['konter']
     Route::get('service/detail/{id}', [ServiceController::class, 'detail'])->name('service.detail');
     Route::post('service/store', [ServiceController::class, 'store'])->name('service.store');
     Route::post('service/storeStatus', [ServiceController::class, 'storeStatus'])->name('service.storeStatus');
+    Route::post('service/storePrice', [ServiceController::class, 'storePrice'])->name('service.storePrice');
     Route::put('service/update/{id}', [ServiceController::class, 'update'])->name('service.update');
     Route::delete('service/destroy/{id}', [ServiceController::class, 'destroy'])->name('service.destroy');
     Route::delete('service/destroyStatus/{id}', [ServiceController::class, 'destroyStatus'])->name('service.destroyStatus');
     Route::get('user/akun', [App\Http\Controllers\UserController::class, 'akunKonter'])->name('konter.user.akun');
     Route::get('ulasan', [KonterController::class, 'ulasan'])->name('ulasan');
+    Route::get('chat', [ChatController::class, 'index'])->name('chat');
     Route::post('laporan/exportService', [LaporanController::class, 'exportService'])->name('laporan.exportService');
     Route::get('laporan/exportProduk', [LaporanController::class, 'exportProduk'])->name('laporan.exportProduk');
 });
@@ -97,4 +100,5 @@ Route::group(['prefix' => 'member', 'as' => 'konter', 'middleware' => ['user']],
     Route::post('service/storeFinish', [ServiceController::class, 'storeFinish'])->name('service.storeFinish');
     Route::post('service/storeRating', [ServiceController::class, 'storeRating'])->name('service.storeRating');
     Route::post('/sendChat', [MemberController::class, 'sendChat'])->name('sendChat');
+    Route::any('/sendChatAjax', [MemberController::class, 'sendChatAjax'])->name('sendChatAjax');
 });

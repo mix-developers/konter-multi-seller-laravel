@@ -36,7 +36,11 @@
                                     @foreach ($service as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->code }}</td>
+                                            <td>
+                                                <strong class="text-danger">Rp
+                                                    {{ number_format(App\Models\ServicePrice::getTotalService($item->id)) }}</strong>
+                                                <br><small>{{ $item->code }}</small>
+                                            </td>
                                             <td>{{ $item->date }}</td>
                                             <td>{{ App\Models\ServiceStatus::getNotifStatus($item->id)->status->status }}
                                             </td>

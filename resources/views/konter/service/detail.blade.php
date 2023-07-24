@@ -26,7 +26,7 @@
                         <div class="card-body">
 
                             <div class="row">
-                                <div class="col-md-8 p-2">
+                                <div class="col-md-4 p-2">
                                     <table class="table table-bordered">
                                         <tr>
                                             <td>Foto Service</td>
@@ -48,6 +48,31 @@
                                             <td>Tanggal Service</td>
                                             <td>{{ $service->date }}</td>
                                         </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-4 p-2">
+                                    <button type="button" class="btn btn-success btn-md mb-3 btn-block" data-toggle="modal"
+                                        data-target=".tambah-price"><i class="feather f-16 icon-plus"></i>
+                                        Tambah Harga</button>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <td>Items</td>
+                                                <td>Price</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($service_price as $item)
+                                                <tr>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td>{{ $item->price }}</td>
+                                                </tr>
+                                            @endforeach
+                                            <tr>
+                                                <td><strong>Total</strong></td>
+                                                <td><strong>Rp {{ number_format($total_price) }}</strong></td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                                 <div class="col-md-4 p-2">

@@ -130,7 +130,7 @@
             @if ($service != null)
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="card ">
+                        <div class="card mb-3">
                             <div class="card-header bg-info text-white">
                                 Informasi Service
                             </div>
@@ -155,6 +155,38 @@
                                     </tr>
                                 </table>
 
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <h5>Harga service</h5>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Items</td>
+                                            <td>Price</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (App\Models\ServicePrice::getPriceService($service->id) as $item)
+                                            <tr>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->price }}</td>
+                                            </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td>
+                                                Total
+                                            </td>
+                                            <td>
+                                                Rp
+                                                {{ number_format(App\Models\ServicePrice::getTotalService($service->id)) }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         @if (App\Models\ServiceFinished::where('id_service', $service->id)->count() == 0)

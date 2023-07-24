@@ -11,12 +11,16 @@ class Chat extends Model
     use HasFactory;
     protected $table = 'chat';
     protected $guarded = [];
-    public function from_user(): BelongsTo
+    public function user_from(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'from_user');
+        return $this->belongsTo(User::class, 'from_user', 'id');
     }
-    public function to_user(): BelongsTo
+    public function user_to(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'to_user');
+        return $this->belongsTo(User::class, 'to_user', 'id');
+    }
+    public static function getNotification($id_user)
+    {
+        return self::with(['user_from', 'user_to'])->where('to_user', $id_user)->latest()->take(5)->get();
     }
 }

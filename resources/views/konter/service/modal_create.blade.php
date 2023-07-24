@@ -47,6 +47,7 @@
         </div>
     </div>
 </div>
+
 @push('js')
     <!-- CKEditor -->
     <script src="{{ asset('backand_theme') }}/assets/plugins/ckeditor/ckeditor.js"></script>

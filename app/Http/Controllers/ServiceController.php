@@ -8,6 +8,7 @@ use App\Models\LayananKonter;
 use App\Models\ReviewRating;
 use App\Models\Service;
 use App\Models\ServiceFinished;
+use App\Models\ServicePrice;
 use App\Models\ServiceStatus;
 use App\Models\Status;
 use App\Models\User;
@@ -33,8 +34,10 @@ class ServiceController extends Controller
     }
     public function detail($id)
     {
+
         $konter = Konter::where('id_pemilik', Auth::user()->id)->first();
         $service = Service::where('id', $id)->withTrashed()->first();
+        $service_price = ServicePrice::where('id_service', $id)->get();
         $user = User::find($service->id_user);
         $data = [
             'title' => 'Detail Service',
@@ -42,6 +45,8 @@ class ServiceController extends Controller
             'status' => Status::all(),
             'user' => $user,
             'konter' => $konter,
+            'service_price' => $service_price,
+            'total_price' => ServicePrice::getTotalService($id),
             'status_service' => ServiceStatus::where('id_service', $service->id)->get(),
         ];
         return view('konter.service.detail', $data);
@@ -98,6 +103,28 @@ class ServiceController extends Controller
             return redirect()->back()->with('success', 'Berhasil menambahkan status');
         } else {
             return redirect()->back()->with('danger', 'Gagal menambahkan status');
+        }
+    }
+    public function storePrice(Request $request)
+    {
+        $request->validate([
+            'id_service' => ['required'],
+            'name' => ['required'],
+            'price' => ['required'],
+
+        ]);
+
+        $price = new ServicePrice();
+        $price->id_service = $request->id_service;
+        $price->name = $request->name;
+        $price->price = $request->price;
+        $price->description = '-';
+        $price->quantity = 1;
+
+        if ($price->save()) {
+            return redirect()->back()->with('success', 'Berhasil menambahkan harga');
+        } else {
+            return redirect()->back()->with('danger', 'Gagal menambahkan harga');
         }
     }
     // private function whatsappNotification(string $recipient)

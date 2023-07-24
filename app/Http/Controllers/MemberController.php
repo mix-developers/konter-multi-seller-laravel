@@ -10,6 +10,7 @@ use App\Models\ServiceStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
 {
@@ -78,5 +79,29 @@ class MemberController extends Controller
         } else {
             return redirect()->back()->with('danger', 'Gagal memberikan rating dan ulasan');
         }
+    }
+    public function sendChatAjax(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'from_user' => ['required'],
+            'id_konter' => ['required'],
+            'to_user' => ['required'],
+            'content' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()->all()
+            ]);
+        }
+
+        Chat::create([
+            'from_user' => $request->from_user,
+            'id_konter' => $request->id_konter,
+            'to_user' => $request->to_user,
+            'content' => $request->content,
+        ]);
+
+        return response()->json(['success' => 'Chat created successfully.']);
     }
 }
