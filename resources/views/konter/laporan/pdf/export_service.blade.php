@@ -30,32 +30,43 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <thead>
                 <tr>
-                    <th class="no">#</th>
-                    <th class="no">Kode service</th>
-                    <th class="no">Tanggal Service</th>
-                    <th class="no">Layanan Service</th>
-                    <th class="no">Nama Customer</th>
-                    <th class="no">HP Customer</th>
+                    <th rowspan="2" class="no">#</th>
+                    <th rowspan="2" class="no">Kode service</th>
+                    <th rowspan="2" class="no">Layanan</th>
+                    <th rowspan="2" class="no">Total Harga</th>
+                    <th colspan="2" class="no">Harga</th>
+                </tr>
+                <tr>
+                    <th scope="col" class="no">Item</th>
+                    <th scope="col" class="no">Harga</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $item)
                     <tr>
                         <td width="10">{{ $loop->iteration }}</td>
-                        <td class="unit">
+                        <td>
                             {{ $item->code }}
                         </td>
-                        <td class="unit">
-                            {{ $item->date }}
-                        </td>
-                        <td class="unit">
+                        <td>
                             {{ $item->layanan->layanan }}
                         </td>
-                        <td class="unit">
-                            {{ $item->pelanggan->name }}
+                        <td style="color:red;">Rp
+                            {{ number_format(App\Models\ServicePrice::getTotalService($item->id)) }}
                         </td>
-                        <td class="unit">
-                            {{ $item->pelanggan->phone }}
+                        <td>
+                            <ol>
+                                @foreach (App\Models\ServicePrice::getPriceService($item->id) as $price)
+                                    <li>{{ $price->name }}</li>
+                                @endforeach
+                            </ol>
+                        </td>
+                        <td>
+                            <ol>
+                                @foreach (App\Models\ServicePrice::getPriceService($item->id) as $price)
+                                    <li>Rp {{ number_format($price->price) }}</li>
+                                @endforeach
+                            </ol>
                         </td>
 
                     </tr>

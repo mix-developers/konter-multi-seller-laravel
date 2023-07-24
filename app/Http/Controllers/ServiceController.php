@@ -72,8 +72,16 @@ class ServiceController extends Controller
         $service->description = $request->description;
         $service->date = date('d-m-Y');
         $service->thumbnail = isset($file_path) ? $file_path : '';
+        $service->save();
 
-        if ($service->save()) {
+        $status = new ServiceStatus();
+        $status->service()->associate($service);
+        $status->id_status = 1;
+        $status->description = $request->description;
+        $status->date = date('d-m-Y');
+        $status->thumbnail = isset($file_path) ? $file_path : '';
+
+        if ($status->save()) {
 
             return redirect()->back()->with('success', 'Berhasil menambahkan data');
         } else {
@@ -224,5 +232,12 @@ class ServiceController extends Controller
         }
         $status->delete();
         return redirect()->back()->with('success', 'Berhasil menghapus status');
+    }
+    public function destroyPrice($id)
+    {
+        $price = ServicePrice::find($id);
+
+        $price->delete();
+        return redirect()->back()->with('success', 'Berhasil menghapus harga');
     }
 }

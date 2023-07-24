@@ -12,6 +12,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Service extends Model
 {
     use HasFactory, SoftDeletes;
+    public function service_status()
+    {
+        return $this->hasMany(ServiceStatus::class, 'id_service');
+    }
     public function pelanggan(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id_user');

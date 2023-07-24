@@ -84,6 +84,7 @@ Route::group(['prefix' => 'konter', 'as' => 'konter', 'middleware' => ['konter']
     Route::put('service/update/{id}', [ServiceController::class, 'update'])->name('service.update');
     Route::delete('service/destroy/{id}', [ServiceController::class, 'destroy'])->name('service.destroy');
     Route::delete('service/destroyStatus/{id}', [ServiceController::class, 'destroyStatus'])->name('service.destroyStatus');
+    Route::delete('service/destroyPrice/{id}', [ServiceController::class, 'destroyPrice'])->name('service.destroyPrice');
     Route::get('user/akun', [App\Http\Controllers\UserController::class, 'akunKonter'])->name('konter.user.akun');
     Route::get('ulasan', [KonterController::class, 'ulasan'])->name('ulasan');
     Route::get('chat', [ChatController::class, 'index'])->name('chat');

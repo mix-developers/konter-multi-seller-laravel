@@ -50,34 +50,9 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <div class="col-md-4 p-2">
-                                    <button type="button" class="btn btn-success btn-md mb-3 btn-block" data-toggle="modal"
-                                        data-target=".tambah-price"><i class="feather f-16 icon-plus"></i>
-                                        Tambah Harga</button>
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <td>Items</td>
-                                                <td>Price</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($service_price as $item)
-                                                <tr>
-                                                    <td>{{ $item->name }}</td>
-                                                    <td>{{ $item->price }}</td>
-                                                </tr>
-                                            @endforeach
-                                            <tr>
-                                                <td><strong>Total</strong></td>
-                                                <td><strong>Rp {{ number_format($total_price) }}</strong></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-md-4 p-2">
-                                    <table class="table table-bordered">
 
+                                <div class="col-md-4 p-2">
+                                    <table class="table table-bordered">
                                         <tr>
                                             <td>Nama Pelanggan</td>
                                             <td>{{ $service->pelanggan->name }}<br>
@@ -104,6 +79,44 @@
                                             </form>
                                         @endif
                                     </div>
+                                </div>
+                                <div class="col-md-4 p-2">
+                                    <button type="button" class="btn btn-success btn-md mb-3 btn-block" data-toggle="modal"
+                                        data-target=".tambah-price"><i class="feather f-16 icon-plus"></i>
+                                        Tambah Harga</button>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <td>Items</td>
+                                                <td>Price</td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($service_price as $item)
+                                                <tr>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td>Rp {{ number_format($item->price) }}</td>
+                                                    <td width="30">
+                                                        <form method="POST"
+                                                            action="{{ url('/konter/service/destroyPrice', $service->id) }}"
+                                                            class="d-inline-block">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn btn-light-danger btn-sm delete-button">
+                                                                <i class="fas fa-times-circle"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            <tr>
+                                                <td><strong>Total</strong></td>
+                                                <td><strong>Rp {{ number_format($total_price) }}</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
 

@@ -2,10 +2,16 @@
     <table class="table table-bordered table-striped mb-0 lara-dataTable">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Thumbnail</th>
-                <th>Kode service</th>
-                <th>Layanan</th>
+                <th rowspan="2" class="align-middle">#</th>
+                <th rowspan="2" class="align-middle">Thumbnail</th>
+                <th rowspan="2" class="align-middle">Kode service</th>
+                <th rowspan="2" class="align-middle">Layanan</th>
+                <th rowspan="2" class="align-middle">Total Harga</th>
+                <th colspan="2" class="text-center">Harga</th>
+            </tr>
+            <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Harga</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +34,22 @@
                     </td>
                     <td>
                         {{ $item->layanan->layanan }}
+                    </td>
+                    <td class="text-danger">Rp {{ number_format(App\Models\ServicePrice::getTotalService($item->id)) }}
+                    </td>
+                    <td>
+                        <ol>
+                            @foreach (App\Models\ServicePrice::getPriceService($item->id) as $price)
+                                <li>{{ $price->name }}</li>
+                            @endforeach
+                        </ol>
+                    </td>
+                    <td>
+                        <ol>
+                            @foreach (App\Models\ServicePrice::getPriceService($item->id) as $price)
+                                <li>Rp {{ number_format($price->price) }}</li>
+                            @endforeach
+                        </ol>
                     </td>
                 </tr>
             @endforeach
