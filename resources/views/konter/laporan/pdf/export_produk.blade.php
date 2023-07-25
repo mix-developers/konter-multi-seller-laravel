@@ -14,7 +14,7 @@
             {{-- <img src="{{ public_path('img/logo_merauke.png') }}"> --}}
         </div>
         <div id="company">
-            <h1>Aplikasi SimVice</h1>
+            <h1>Konter {{ $konter->name }}</h1>
         </div>
         </div>
     </header>
@@ -31,7 +31,6 @@
             <thead>
                 <tr>
                     <th class="no">#</th>
-                    <th class="no">Foto Produk</th>
                     <th class="no">Nama Produk</th>
                     <th class="no">Harga</th>
                     <th class="no">Stok </th>
@@ -41,10 +40,7 @@
                 @foreach ($data as $item)
                     <tr>
                         <td width="10">{{ $loop->iteration }}</td>
-                        <td class="unit">
-                            <img src="{{ $item->thumbnail == '' ? public_path('img/no-image.jpg') : storage_path($item->thumbnail) }}"
-                                alt="{{ $item->name }}" class="img-fluid img-avatar" width="100">
-                        </td>
+
                         <td class="unit">
                             {{ $item->name }}
                         </td>
@@ -52,7 +48,7 @@
                             Rp {{ number_format($item->price) }}
                         </td>
                         <td class="unit">
-                            {{ $item->stok }}
+                            {{ App\Models\ProdukStok::getTotalStokProduk($item->id) }}
                         </td>
                     </tr>
                 @endforeach

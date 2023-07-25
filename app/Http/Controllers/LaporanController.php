@@ -53,6 +53,7 @@ class LaporanController extends Controller
 
         $pdf = FacadePdf::loadView('konter.laporan.pdf.export_produk', [
             'data' => $data,
+            'konter' => $konter,
         ])->setPaper('a4', 'landscape')->setOption(['dpi' => 150, 'defaultFont' => 'arial']);
 
         return $pdf->stream('Data Produk ' . $konter->name . date('d-m-Y') . '.pdf');

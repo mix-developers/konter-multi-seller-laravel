@@ -53,6 +53,9 @@
         <li class="pc-item"><a href="{{ url('/konter/produk') }}" class="pc-link "><span class="pc-micon"><i
                         data-feather="life-buoy"></i></span><span class="pc-mtext">Produk Konter</span></a>
         </li>
+        <li class="pc-item"><a href="{{ url('/konter/stok') }}" class="pc-link "><span class="pc-micon"><i
+                        data-feather="life-buoy"></i></span><span class="pc-mtext">Stok Produk</span></a>
+        </li>
         <li class="pc-item"><a href="{{ url('/konter/service') }}" class="pc-link "><span class="pc-micon"><i
                         data-feather="life-buoy"></i></span><span class="pc-mtext">Service</span></a>
         </li>

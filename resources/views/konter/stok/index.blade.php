@@ -33,47 +33,48 @@
                                             <th>#</th>
                                             <th>Thumbnail</th>
                                             <th>Nama Produk</th>
-                                            <th>Status</th>
+                                            <th>Stok</th>
+                                            <th>Jenis</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($produk as $item)
-                                            @php
-                                                $total_stok = App\Models\ProdukStok::getTotalStokProduk($item->id);
-                                            @endphp
+                                        @foreach ($stok as $item)
                                             <tr>
                                                 <td width="10">{{ $loop->iteration }}</td>
                                                 <td width="150">
                                                     <div class="thumbnail">
                                                         <div class="thumb">
-                                                            <a href="{{ $item->thumbnail == '' ? asset('img/user.png') : url(Storage::url($item->thumbnail)) }}"
-                                                                data-lightbox="1" data-title="{{ $item->judul }}"
+                                                            <a href="{{ $item->produk->thumbnail == '' ? asset('img/user.png') : url(Storage::url($item->produk->thumbnail)) }}"
+                                                                data-lightbox="1" data-title="{{ $item->produk->name }}"
                                                                 data-toggle="lightbox">
-                                                                <img src="{{ $item->thumbnail == '' ? asset('img/user.png') : url(Storage::url($item->thumbnail)) }}"
-                                                                    alt="{{ $item->name }}" class="img-fluid img-avatar"
-                                                                    width="100">
+                                                                <img src="{{ $item->produk->thumbnail == '' ? asset('img/user.png') : url(Storage::url($item->produk->thumbnail)) }}"
+                                                                    alt="{{ $item->produk->name }}"
+                                                                    class="img-fluid img-avatar" width="100">
                                                             </a>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    {{ $item->name }}<br>
-                                                    <p class="text-muted">Deskripsi : {!! Str::limit($item->description, 50) !!}</p>
+                                                    {{ $item->produk->name }}</p>
                                                 </td>
                                                 <td>
                                                     <span
-                                                        class="badge {{ $total_stok > 0 ? 'badge-success' : 'badge-danger' }}">{{ $total_stok > 0 ? 'Tersedia' : 'Habis' }}</span><br>
-                                                    <p class="text-muted">Stok :
-                                                        {{ number_format($total_stok) }}</p>
+                                                        class="{{ $item->type == 1 ? 'text-success' : 'text-danger' }}">{{ $item->stok }}</span>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="badge  {{ $item->type == 1 ? 'badge-success' : 'badge-danger' }}">{{ $item->type == 1 ? 'Pemasukkan' : 'Pengeluaran' }}</span>
                                                 </td>
                                                 <td width="200">
                                                     <button type="button" class="btn btn-light-warning btn-md"
                                                         data-toggle="modal" data-target=".edit-{{ $item->id }}"><i
                                                             class="icon feather icon-edit f-16"></i>
                                                         Edit</button>
-                                                    @include('konter.produk.modal_edit')
-                                                    <form method="POST" action="" class="d-inline-block">
+                                                    @include('konter.stok.modal_edit')
+                                                    <form method="POST"
+                                                        action="{{ url('/konter/stok/destroy', $item->id) }}"
+                                                        class="d-inline-block">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit"
@@ -95,5 +96,5 @@
             <!-- [ Main Content ] end -->
         </div>
     </section>
-    @include('konter.produk.modal_create')
+    @include('konter.stok.modal_create')
 @endsection

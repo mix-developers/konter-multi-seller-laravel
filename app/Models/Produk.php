@@ -23,4 +23,8 @@ class Produk extends Model
     {
         return self::with(['konter', 'kategori'])->where('id_kategori', $id_kategori)->count();
     }
+    public static function getProdukKonter($id)
+    {
+        return self::with(['konter', 'kategori'])->where('id_konter', $id)->get();
+    }
 }

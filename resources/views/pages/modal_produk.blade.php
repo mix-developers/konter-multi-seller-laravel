@@ -1,4 +1,7 @@
 @foreach ($produk as $item)
+    @php
+        $total_stok = App\Models\ProdukStok::getTotalStokProduk($item->id);
+    @endphp
     <!-- Modal -->
     <div class="modal fade" id="produk-{{ $item->slug }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -18,7 +21,7 @@
                     </p>
                     <p class="p-2 border border-secondary shadow-sm rounded"><strong class="text-info">Stok Produk :
                         </strong>
-                        {{ $item->stok }}
+                        {{ App\Models\ProdukStok::getTotalStokProduk($item->id) }}
                     </p>
                     <p class="p-2 border border-secondary shadow-sm rounded"><strong class="text-info">Konter :
                         </strong>

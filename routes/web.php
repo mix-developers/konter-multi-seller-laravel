@@ -10,9 +10,11 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LayananKonterController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ProdukStokController;
 use App\Http\Controllers\PusherController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StatusController;
+use App\Models\ProdukStok;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -71,10 +73,17 @@ Route::group(['prefix' => 'konter', 'as' => 'konter', 'middleware' => ['konter']
     Route::post('layanan/store', [LayananKonterController::class, 'store'])->name('layanan.store');
     Route::put('layanan/update/{id}', [LayananKonterController::class, 'update'])->name('layanan.update');
     Route::delete('layanan/destroy/{id}', [LayananKonterController::class, 'destroy'])->name('layanan.destroy');
+    //produk
     Route::get('produk', [ProdukController::class, 'list'])->name('produk');
     Route::post('produk/store', [ProdukController::class, 'store'])->name('produk.store');
     Route::put('produk/update/{id}', [ProdukController::class, 'update'])->name('produk.update');
     Route::delete('produk/destroy/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+    //produk
+    Route::get('stok', [ProdukStokController::class, 'index'])->name('stok');
+    Route::post('stok/store', [ProdukStokController::class, 'store'])->name('stok.store');
+    Route::put('stok/update/{id}', [ProdukStokController::class, 'update'])->name('stok.update');
+    Route::delete('stok/destroy/{id}', [ProdukStokController::class, 'destroy'])->name('stok.destroy');
+    //laporan
     Route::get('laporan', [LaporanController::class, 'konter'])->name('laporan');
     Route::get('service', [ServiceController::class, 'index'])->name('service');
     Route::get('service/detail/{id}', [ServiceController::class, 'detail'])->name('service.detail');

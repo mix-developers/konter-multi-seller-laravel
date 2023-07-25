@@ -6,6 +6,7 @@
                 <th>Thumbnail</th>
                 <th>Nama Produk</th>
                 <th>Konter</th>
+                <th>Stok</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,9 @@
                     </td>
                     <td>
                         {{ $item->konter->name }}
+                    </td>
+                    <td>
+                        {{ App\Models\ProdukStok::getTotalStokProduk($item->id) }}
                     </td>
                 </tr>
             @endforeach
