@@ -21,7 +21,6 @@ class ServiceStatus extends Model
     {
         return $this->belongsTo(Service::class, 'id_service')->withTrashed();
     }
-
     public static function getNotifStatus($id_service)
     {
         return self::with('status')->where('id_service', $id_service)->latest()->first();
