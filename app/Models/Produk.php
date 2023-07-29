@@ -17,7 +17,7 @@ class Produk extends Model
     }
     public function kategori(): BelongsTo
     {
-        return $this->belongsTo(kategori::class, 'id_kategori');
+        return $this->belongsTo(Kategori::class, 'id_kategori');
     }
     public static function getCountKategori($id_kategori)
     {
