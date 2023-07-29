@@ -33,8 +33,9 @@
                     @endphp
                     <div class="col-lg-4 col-md-6">
                         <div class="team-member">
-                            <img loading="lazy" src="{{ asset('/') }}img/leptop.png" alt="leptop"
-                                class="img-fluid p-3">
+                            <img loading="lazy"
+                                src="{{ $item->thumbnail == null || $item->thumbnail == '' ? asset('/img/toko.jpg') : url(Storage::url($item->thumbnail)) }}"
+                                alt="leptop" class="img-fluid p-3">
                             <div class="contents ">
                                 <b
                                     class="p-2  text-white {{ $total_stok > 0 ? 'bg-info' : 'bg-danger' }}">{{ $total_stok > 0 ? 'Tersedia' : 'Habis' }}</b>

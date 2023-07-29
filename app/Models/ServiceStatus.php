@@ -14,7 +14,7 @@ class ServiceStatus extends Model
 
     public function status(): BelongsTo
     {
-        return $this->belongsTo(status::class, 'id_status');
+        return $this->belongsTo(Status::class, 'id_status');
     }
 
     public function service(): BelongsTo
