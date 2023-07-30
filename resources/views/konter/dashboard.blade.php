@@ -4,25 +4,30 @@
     <div class="pc-container">
         <div class="pcoded-content">
             @include('layouts.backand.title')
+
             <div class="row">
-
-                <div class="col-12">
-
-                    <div class="card">
-                        <div class="card-header">{{ __('Dashboard') }} Konter</div>
-                        <div class="card-body">
-                            @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-
-                            {{ __('You are logged in!') }}
-
+                @if (App\Models\ServicePrice::getIncomeMonthlyBeforeKonter() <= $income)
+                    <div class="col-12">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Hi, {{ Auth::user()->name }}!</strong> Pendapatan service konter anda bulan ini naik
+                            sebesar
+                            <strong>{{ App\Models\ServicePrice::getIncomeMonthlyPercentKonter() }}%</strong>.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
                         </div>
                     </div>
-
-                </div>
+                @else
+                    <div class="col-12">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Hi, {{ Auth::user()->name }}!</strong> Pendapatan service konter anda bulan ini turun
+                            sebesar
+                            <strong>{{ App\Models\ServicePrice::getIncomeMonthlyPercentKonter() }}%</strong>.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+                        </div>
+                    </div>
+                @endif
+                @include('konter.dashboard_component._income_service')
             </div>
         </div>
     </div>

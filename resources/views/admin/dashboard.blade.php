@@ -25,6 +25,7 @@
                         </div>
                     </div>
                 @endif
+                @include('admin.dashboard_component._user_count')
                 @include('admin.dashboard_component._income_service')
             </div>
         </div>

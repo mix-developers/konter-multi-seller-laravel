@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Konter;
 use App\Models\ReviewRating;
+use App\Models\ServicePrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +13,8 @@ class KonterController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Dashboard Konter'
+            'title' => 'Dashboard Konter',
+            'income' => ServicePrice::getIncomeMonthly(),
         ];
         return view('konter.dashboard', $data);
     }
