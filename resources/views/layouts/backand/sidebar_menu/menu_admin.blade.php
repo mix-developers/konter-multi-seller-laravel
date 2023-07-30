@@ -32,6 +32,7 @@
             <ul class="pc-submenu">
                 <li class="pc-item"><a href="{{ url('admin/akun/admin') }}" class="pc-link ">Akun Admin</a></li>
                 <li class="pc-item"><a href="{{ url('admin/akun/konter') }}" class="pc-link ">Akun Konter</a></li>
+                <li class="pc-item"><a href="{{ url('admin/akun/user') }}" class="pc-link ">Akun User</a></li>
             </ul>
         </li>
         <li class="pc-item pc-caption">

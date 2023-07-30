@@ -24,6 +24,14 @@ class UserController extends Controller
         ];
         return view('admin.user.konter', $data);
     }
+    public function user()
+    {
+        $data = [
+            'title' => 'Akun User',
+            'user' => User::where('role', 'user')->get(),
+        ];
+        return view('admin.user.user', $data);
+    }
     public function akunKonter()
     {
         $user = User::find(Auth::user()->id);

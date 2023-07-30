@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/akun/admin', [App\Http\Controllers\UserController::class, 'admin'])->name('akun.admin');
     Route::get('/akun/konter', [App\Http\Controllers\UserController::class, 'konter'])->name('akun.konter');
+    Route::get('/akun/user', [App\Http\Controllers\UserController::class, 'user'])->name('akun.user');
     Route::get('/akun/akun', [App\Http\Controllers\UserController::class, 'akunAdmin'])->name('akun.akun');
     Route::get('produk', [ProdukController::class, 'index'])->name('produk');
     Route::get('konter', [KonterTokoController::class, 'index'])->name('konter');
