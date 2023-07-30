@@ -46,8 +46,6 @@ class ProdukController extends Controller
         $produk->slug = Str::slug($request->name);
         $produk->id_konter = $request->id_konter;
         $produk->price = $request->price;
-        $produk->status = $request->status;
-        $produk->stok = $request->stok;
         $produk->description = $request->description;
         $produk->thumbnail = isset($file_path) ? $file_path : '';
         if ($produk->save()) {

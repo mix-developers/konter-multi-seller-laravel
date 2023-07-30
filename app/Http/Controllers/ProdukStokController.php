@@ -36,8 +36,9 @@ class ProdukStokController extends Controller
         $stok->type = $request->type;
 
         $cek_stok = ProdukStok::getTotalStokProduk($request->id_produk);
+        // dd($cek_stok);
 
-        if ($request->type == 0 && $cek_stok > $request->stok) {
+        if ($request->type == 0 && $cek_stok >= $request->stok) {
 
             if ($stok->save()) {
 

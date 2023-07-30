@@ -19,7 +19,7 @@ class ProdukStok extends Model
     }
     public static function getStokProduk($id)
     {
-        return self::with(['produk', 'konter'])->where('id_produk', $id)->get();
+        return self::with(['produk', 'konter'])->where('id_konter', $id)->get();
     }
     public static function getTotalStokProduk($id)
     {

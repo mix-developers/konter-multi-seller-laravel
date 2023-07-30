@@ -17,39 +17,25 @@
                             name="thumbnail">
                     </div>
                     <div class="row">
-                        <div class="col-9">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label for="name">Nama Produk</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name">
                             </div>
                         </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="Tersedia">Tersedia</option>
-                                    <option value="Habis">Habis</option>
-                                </select>
-                            </div>
-                        </div>
+
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label for="price">Harga Produk</label>
                                 <input type="number" class="form-control @error('price') is-invalid @enderror"
                                     name="price">
                             </div>
                         </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="stok">Stok Produk</label>
-                                <input type="text" class="form-control @error('stok') is-invalid @enderror"
-                                    name="stok">
-                            </div>
-                        </div>
+
                     </div>
                     <div class="form-group ">
                         <label>Deskripsi Produk</label>

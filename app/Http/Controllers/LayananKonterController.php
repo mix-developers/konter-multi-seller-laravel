@@ -24,22 +24,20 @@ class LayananKonterController extends Controller
     {
         $konter = Konter::where('id_pemilik', Auth::user()->id)->first();
 
-        //cek layanan
-        $cek_layanan = LayananKonter::where('id_konter', $konter->id)->get();
-        $hasil_cek = [];
-        foreach ($cek_layanan as $cek) {
-            $hasil_cek = LayananKonter::where('id_layanan', $cek->id_layanan)->count();
-        }
+
 
         $request->validate([
             'id_layanan' => ['required'],
         ]);
 
+        $cek = LayananKonter::where('id_konter', $konter->id)->where('id_layanan', $request->id_layanan)->count();
+
         $layanan = new LayananKonter;
         $layanan->id_layanan = $request->id_layanan;
         $layanan->id_konter = $konter->id;
         $layanan->id_user = Auth::user()->id;
-        if ($hasil_cek == 0) {
+        // dd($cek);
+        if ($cek <= 0) {
             $layanan->save();
             return redirect()->back()->with('success', 'Berhasil menambahkan data');
         } else {
