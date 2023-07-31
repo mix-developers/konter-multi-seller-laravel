@@ -14,7 +14,7 @@ class KonterController extends Controller
     {
         $data = [
             'title' => 'Dashboard Konter',
-            'income' => ServicePrice::getIncomeMonthly(),
+            'income' => ServicePrice::getIncomeMonthlyKonter(),
         ];
         return view('konter.dashboard', $data);
     }

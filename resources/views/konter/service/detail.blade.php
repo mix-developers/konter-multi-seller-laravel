@@ -89,7 +89,7 @@
                                             <tr>
                                                 <td>Items</td>
                                                 <td>Price</td>
-                                                <td></td>
+                                                <td>Aksi</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -97,14 +97,22 @@
                                                 <tr>
                                                     <td>{{ $item->name }}</td>
                                                     <td>Rp {{ number_format($item->price) }}</td>
-                                                    <td width="30">
+                                                    <td width="50">
+                                                        <a href="https://api.whatsapp.com/send?phone={{ $user->phone }}&text=Hai%20*{{ $user->name }}!*%0A__________________________________________________%0A*Informasi%20Tambahan%20Layanan*%0AKode%20service%20:%20{{ $service->code }}%0ATambahan%20Layanan%20:%20{{ $item->name }}%0ABiaya%20Layanan%20:%20Rp.{{ number_format($item->price) }}%0ATotal%20Biaya%20Service%20:%20Rp.{{ number_format($total_price) }}%0ACek%20di%20sini%20:%20{{ url('/status', $service->code) }}%0A___________________________________________________%0A*Informasi%20Konter*%0AKonter%20:%20*{{ $konter->name }}*%0AAlamat%20:%20*{{ $konter->address }}*%0A%0A_Balas IYA untuk melanjutkan dan Balas TIDAK untuk tidak melanjutkan, dan ajukan pertanyaan pada nomor ini jika ada yang ingin ditanyakan_"
+                                                            class="btn btn-light-success btn-sm" target="__blank"
+                                                            data-toggle="tooltip" data-placement="top" title=""
+                                                            data-original-title="Klik untuk mengirim pesan whatsapp terkait penambahan layanan"><i
+                                                                class="fab fa-whatsapp"></i>
+                                                        </a>
                                                         <form method="POST"
                                                             action="{{ url('/konter/service/destroyPrice', $service->id) }}"
                                                             class="d-inline-block">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                                class="btn btn-light-danger btn-sm delete-button">
+                                                                class="btn btn-light-danger btn-sm delete-button"
+                                                                data-toggle="tooltip" data-placement="top" title=""
+                                                                data-original-title="Klik untuk menghapus">
                                                                 <i class="fas fa-times-circle"></i>
                                                             </button>
                                                         </form>
@@ -134,7 +142,7 @@
                                         <button type="button" class="btn btn-success btn-md mb-3 btn-round"
                                             data-toggle="modal" data-target=".tambah-status"><i
                                                 class="feather f-16 icon-plus"></i>
-                                            Tambah</button>
+                                            Tambah Status</button>
                                     @endif
                                 </div>
                             </div>
@@ -177,7 +185,9 @@
                                                 <td width="50">
                                                     @if ($service->deleted_at == null)
                                                         <a href="https://api.whatsapp.com/send?phone={{ $user->phone }}&text=Hai%20*{{ $user->name }}!*%0A__________________________________________________%0A*Informasi%20Service*%0AKode%20service%20:%20{{ $item->service->code }}%0ATotal%20Biaya%20:%20Rp.{{ number_format($total_price) }}%0AStatus%20service%20anda%20:%20*{{ $item->status->status }}*%0ACek%20di%20sini%20:%20{{ url('/status', $item->service->code) }}%0A___________________________________________________%0A*Informasi%20Konter*%0AKonter%20:%20*{{ $konter->name }}*%0AAlamat%20:%20*{{ $konter->address }}*"
-                                                            class="btn btn-light-success btn-md" target="__blank"><i
+                                                            class="btn btn-light-success btn-md" target="__blank"
+                                                            data-toggle="tooltip" data-placement="top" title=""
+                                                            data-original-title="Klik untuk mengirim pesan whatsapp terkait status service"><i
                                                                 class="fab fa-whatsapp"></i>
                                                         </a>
                                                         <form method="POST"
@@ -186,7 +196,9 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                                class="btn btn-light-danger btn-md delete-button"><i
+                                                                class="btn btn-light-danger btn-md delete-button"
+                                                                data-toggle="tooltip" data-placement="top" title=""
+                                                                data-original-title="Klik untuk menghapus status"><i
                                                                     class="feather icon-trash-2  f-16 "></i> Delete
                                                             </button>
                                                         </form>
@@ -196,7 +208,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
                             </div>
+
                         </div>
                     </div>
                 </div>

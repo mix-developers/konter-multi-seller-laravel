@@ -68,6 +68,39 @@
         </div>
     </div>
 </div>
+<div class="modal fade tambah-layanan" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="myLargeModalLabel">Tambah Layanan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="POST" action="{{ url('/konter/service/storeLayanan') }}" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="id_service" value="{{ $service->id }}">
+                    <input type="hidden" name="id_konter" value="{{ $service->id_konter }}">
+
+                    <div class="form-group ">
+                        <label>Nama Layanan</label>
+                        <input type="text" class="form-control @error('layanan') is-invalid @enderror"
+                            name="layanan">
+                    </div>
+                    <div class="form-group ">
+                        <label>Harga</label>
+                        <input type="text" class="form-control @error('price') is-invalid @enderror"
+                            name="price">
+                    </div>
+
+                    <button type="submit" class="btn  btn-primary">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @push('js')
     <!-- CKEditor -->
     <script src="{{ asset('backand_theme') }}/assets/plugins/ckeditor/ckeditor.js"></script>
