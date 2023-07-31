@@ -11,6 +11,7 @@ use App\Models\Produk;
 use App\Models\ReviewRating;
 use App\Models\Service;
 use App\Models\ServiceStatus;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,11 +66,11 @@ class FrontController extends Controller
     public function service(Request $request)
     {
         $request->validate([
-            'keyword' => ['required', 'string', 'max:16', 'min:16']
+            'code' => ['required', 'string', 'max:16', 'min:16']
         ]);
-        $service = Service::where('code', 'like', '%' . $request->keyword . '%')->first();
+        $service = Service::where('code', 'like', '%' . $request->code . '%')->first();
         $data = [
-            'title' => 'Kode service : ' . $request->keyword,
+            'title' => 'Kode service : ' . $request->code,
             'service' => $service,
             'keyword' => $request->keyword,
             'status' => ServiceStatus::where('id_service', $service->id)->get(),

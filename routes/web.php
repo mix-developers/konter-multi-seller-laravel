@@ -33,16 +33,18 @@ Route::get('/', [FrontController::class, 'index']);
 Route::get('/konter_list', [FrontController::class, 'konter_list']);
 Route::get('/konter_detail/{slug}', [FrontController::class, 'konter_detail']);
 Route::get('/produk_list', [FrontController::class, 'produk_list']);
-Route::post('/service', [FrontController::class, 'service']);
+Route::get('/service', [FrontController::class, 'service']);
 Route::get('/chat', [PusherController::class, 'index']);
-Route::post('/broadcast', 'App\http\Controllers\PusherController@broadcast');
-Route::post('/receive', 'App\http\Controllers\PusherController@receive');
-Route::get('/status/{code}', [App\Http\Controllers\MemberController::class, 'status'])->name('status');
+
+// Real-time Chat Routes
+Route::post('/broadcast', [PusherController::class, 'broadcast']);
+Route::post('/receive', [PusherController::class, 'receive']);
+
+Route::get('/status/{code}', [MemberController::class, 'status'])->name('status');
 
 Auth::routes();
-
-Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], function () {
-    // index dashboar admin dan super admin
+// Admin Routes
+Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/akun/admin', [App\Http\Controllers\UserController::class, 'admin'])->name('akun.admin');
     Route::get('/akun/konter', [App\Http\Controllers\UserController::class, 'konter'])->name('akun.konter');
@@ -67,9 +69,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], 
     Route::delete('status/destroy/{id}', [StatusController::class, 'destroy'])->name('status.destroy');
     Route::get('laporan', [LaporanController::class, 'admin'])->name('laporan');
 });
-Route::group(['prefix' => 'konter', 'as' => 'konter', 'middleware' => ['konter']], function () {
-    // index dashboar konter
+// Konter Routes
+Route::prefix('konter')->middleware('konter')->name('konter.')->group(function () {
     Route::get('/', [App\Http\Controllers\KonterController::class, 'index'])->name('home');
+    Route::post('konter/store', [KonterTokoController::class, 'store'])->name('konter.store');
     Route::get('layanan', [LayananKonterController::class, 'index'])->name('layanan');
     Route::post('layanan/store', [LayananKonterController::class, 'store'])->name('layanan.store');
     Route::put('layanan/update/{id}', [LayananKonterController::class, 'update'])->name('layanan.update');
@@ -101,8 +104,8 @@ Route::group(['prefix' => 'konter', 'as' => 'konter', 'middleware' => ['konter']
     Route::post('laporan/exportService', [LaporanController::class, 'exportService'])->name('laporan.exportService');
     Route::get('laporan/exportProduk', [LaporanController::class, 'exportProduk'])->name('laporan.exportProduk');
 });
-Route::group(['prefix' => 'member', 'as' => 'konter', 'middleware' => ['user']], function () {
-    // index user
+// Member Routes
+Route::prefix('member')->middleware('user')->name('member.')->group(function () {
     Route::get('/', [App\Http\Controllers\MemberController::class, 'index'])->name('home');
     Route::get('/ulasan', [App\Http\Controllers\MemberController::class, 'ulasan'])->name('ulasan');
     Route::get('/status_service', [App\Http\Controllers\MemberController::class, 'status_service'])->name('status_service');

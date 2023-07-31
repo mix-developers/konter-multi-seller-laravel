@@ -71,7 +71,12 @@
     </section>
     <!--End team section-->
 
-    @include('pages.modal_produk')
+    @foreach ($produk as $item)
+        @php
+            $total_stok = App\Models\ProdukStok::getTotalStokProduk($item->id);
+        @endphp
+        @include('pages.components.product-modal', ['product' => $item, 'total_stok' => $total_stok])
+    @endforeach
 @endsection
 @section('script')
     <script type="text/javascript">

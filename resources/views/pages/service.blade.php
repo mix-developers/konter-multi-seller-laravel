@@ -1,42 +1,17 @@
 @extends('layouts.frontend.app')
+
 @section('content')
-    <!--team section-->
+    <!-- Team section -->
     <section class="team-section section">
-        <div class="container ">
+        <div class="container">
             <div class="section-title text-center">
                 <h3>{{ $title }}</h3>
-
             </div>
             @if ($service != null)
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="card ">
-                            <div class="card-header bg-info text-white">
-                                Informasi Service
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <td>Foto Service</td>
-                                        <td><img src="{{ $service->thumbnail == '' ? asset('img/user.png') : url(Storage::url($service->thumbnail)) }}"
-                                                alt="{{ $service->name }}" class="img-fluid img-avatar" width="100"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nama Pelanggan</td>
-                                        <td>{{ $service->pelanggan->name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Layanan</td>
-                                        <td>{{ $service->layanan->layanan }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tanggal Service</td>
-                                        <td>{{ $service->date }}</td>
-                                    </tr>
-                                </table>
-
-                            </div>
-                        </div>
+                        @component('pages.components.service-card', ['service' => $service])
+                        @endcomponent
                     </div>
                     <div class="col-lg-8">
                         <div class="card">
@@ -52,16 +27,14 @@
                                             <th>Tanggal</th>
                                         </tr>
                                     </thead>
-                                    <thead>
+                                    <tbody>
                                         @foreach ($status as $item)
                                             <tr>
-                                                <td>
-                                                    {{ $loop->iteration }}
-                                                </td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>
                                                     {{ $item->status->status }}<br>
-                                                    @if ($item->thumbnail != null || $item->thumbanil != '')
-                                                        <img src="{{ $item->thumbnail == '' ? asset('img/no-image.jpg') : url(Storage::url($item->thumbnail)) }}"
+                                                    @if ($item->thumbnail)
+                                                        <img src="{{ url(Storage::url($item->thumbnail)) }}"
                                                             alt="{{ $item->name }}" class="img-fluid img-avatar"
                                                             width="100">
                                                     @endif
@@ -69,7 +42,7 @@
                                                 <td>{{ $item->date }}</td>
                                             </tr>
                                         @endforeach
-                                    </thead>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -77,14 +50,11 @@
                 </div>
             @else
                 <div class="text-center">
-                    <p class="text-danger"><i class="fa fa-exclamation-triangle"></i> service tidak tersedia, mohon cek
-                        kembali kode anda
-                    </p>
+                    <p class="text-danger"><i class="fa fa-exclamation-triangle"></i> Service tidak tersedia, mohon cek
+                        kembali kode anda</p>
                 </div>
             @endif
-
-
         </div>
     </section>
-    <!--End team section-->
+    <!-- End team section -->
 @endsection

@@ -114,7 +114,7 @@
         <div class="container">
             <div class="section-title ">
                 <h3 class="text-center">{{ $title }}
-                    @if (date('h:i') > $konter->time_close || date('h:i') < $konter->time_open)
+                    @if (date('H:i') > $konter->time_close || date('H:i') < $konter->time_open)
                         <span class="badge badge-danger text-white">TUTUP</span>
                     @else
                         <span class="badge badge-success text-white">BUKA</span>
@@ -124,7 +124,7 @@
                 <div class="row">
                     <div class="col-md-9">
                         <div class="row justify-content-center ">
-                            @foreach ($produk as $item)
+                            @forelse ($produk as $item)
                                 @php
                                     $total_stok = App\Models\ProdukStok::getTotalStokProduk($item->id);
                                 @endphp
@@ -148,7 +148,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            @empty
+                                <div class="text-center" style="height: 300px;">
+                                    <p class="text-muted">Belum ada produk pada konter ini</p>
+                                </div>
+                            @endforelse
+
 
                         </div>
                         <div class="mt-4">
@@ -218,5 +223,10 @@
         </div>
     </section>
     <!--End team section-->
-    @include('pages.modal_produk')
+    @foreach ($produk as $item)
+        @php
+            $total_stok = App\Models\ProdukStok::getTotalStokProduk($item->id);
+        @endphp
+        @include('pages.components.product-modal', ['product' => $item, 'total_stok' => $total_stok])
+    @endforeach
 @endsection

@@ -21,6 +21,12 @@ class ProdukStok extends Model
     {
         return self::with(['produk', 'konter'])->where('id_konter', $id)->get();
     }
+    public static function getStokCountAvailable($id)
+    {
+        $available = self::with(['produk', 'konter'])->where('id_konter', $id)->where('type', 1)->sum('stok');
+        $not_available = self::with(['produk', 'konter'])->where('id_konter', $id)->where('type', 0)->sum('stok');
+        return $available - $not_available;
+    }
     public static function getTotalStokProduk($id)
     {
         $masuk = self::with(['produk', 'konter'])->where('id_produk', $id)->where('type', 1)->sum('stok');

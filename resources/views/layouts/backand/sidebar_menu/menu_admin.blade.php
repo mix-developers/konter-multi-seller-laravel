@@ -42,36 +42,41 @@
                         data-feather="inbox"></i></span><span class="pc-mtext">laporan
                 </span></a></li>
     @else
+        @php
+            $konter = App\Models\Konter::where('id_pemilik', Auth::id())->first();
+        @endphp
+
         <li class="pc-item"><a href="{{ url('/konter') }}" class="pc-link "><span class="pc-micon"><i
                         data-feather="layout"></i></span><span class="pc-mtext">Dashboard</span></a></li>
-
-        <li class="pc-item pc-caption">
-            <label>Master Data</label>
-        </li>
-        <li class="pc-item"><a href="{{ url('/konter/layanan') }}" class="pc-link "><span class="pc-micon"><i
-                        data-feather="life-buoy"></i></span><span class="pc-mtext">Layanan Konter</span></a>
-        </li>
-        <li class="pc-item"><a href="{{ url('/konter/produk') }}" class="pc-link "><span class="pc-micon"><i
-                        data-feather="life-buoy"></i></span><span class="pc-mtext">Produk Konter</span></a>
-        </li>
-        <li class="pc-item"><a href="{{ url('/konter/stok') }}" class="pc-link "><span class="pc-micon"><i
-                        data-feather="life-buoy"></i></span><span class="pc-mtext">Stok Produk</span></a>
-        </li>
-        <li class="pc-item"><a href="{{ url('/konter/service') }}" class="pc-link "><span class="pc-micon"><i
-                        data-feather="life-buoy"></i></span><span class="pc-mtext">Service</span></a>
-        </li>
-        <li class="pc-item"><a href="{{ url('/konter/ulasan') }}" class="pc-link "><span class="pc-micon"><i
-                        data-feather="star"></i></span><span class="pc-mtext">Rating dan Ulasan</span></a>
-        </li>
-        <li class="pc-item"><a href="{{ url('/konter/chat') }}" class="pc-link "><span class="pc-micon"><i
-                        data-feather="message-circle"></i></span><span class="pc-mtext">Chat Pelanggan</span></a>
-        </li>
-        <li class="pc-item pc-caption">
-            <label>Laporan</label>
-        </li>
-        <li class="pc-item"><a href="{{ url('/konter/laporan') }}" class="pc-link "><span class="pc-micon"><i
-                        data-feather="inbox"></i></span><span class="pc-mtext">laporan
-                </span></a></li>
+        @if ($konter != null)
+            <li class="pc-item pc-caption">
+                <label>Master Data</label>
+            </li>
+            <li class="pc-item"><a href="{{ url('/konter/layanan') }}" class="pc-link "><span class="pc-micon"><i
+                            data-feather="life-buoy"></i></span><span class="pc-mtext">Layanan Konter</span></a>
+            </li>
+            <li class="pc-item"><a href="{{ url('/konter/produk') }}" class="pc-link "><span class="pc-micon"><i
+                            data-feather="life-buoy"></i></span><span class="pc-mtext">Produk Konter</span></a>
+            </li>
+            <li class="pc-item"><a href="{{ url('/konter/stok') }}" class="pc-link "><span class="pc-micon"><i
+                            data-feather="life-buoy"></i></span><span class="pc-mtext">Stok Produk</span></a>
+            </li>
+            <li class="pc-item"><a href="{{ url('/konter/service') }}" class="pc-link "><span class="pc-micon"><i
+                            data-feather="life-buoy"></i></span><span class="pc-mtext">Service</span></a>
+            </li>
+            <li class="pc-item"><a href="{{ url('/konter/ulasan') }}" class="pc-link "><span class="pc-micon"><i
+                            data-feather="star"></i></span><span class="pc-mtext">Rating dan Ulasan</span></a>
+            </li>
+            <li class="pc-item"><a href="{{ url('/konter/chat') }}" class="pc-link "><span class="pc-micon"><i
+                            data-feather="message-circle"></i></span><span class="pc-mtext">Chat Pelanggan</span></a>
+            </li>
+            <li class="pc-item pc-caption">
+                <label>Laporan</label>
+            </li>
+            <li class="pc-item"><a href="{{ url('/konter/laporan') }}" class="pc-link "><span class="pc-micon"><i
+                            data-feather="inbox"></i></span><span class="pc-mtext">laporan
+                    </span></a></li>
+        @endif
     @endif
 
 </ul>
