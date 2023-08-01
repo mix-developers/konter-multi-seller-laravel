@@ -109,12 +109,15 @@
 @endsection
 @extends('layouts.frontend.app')
 @section('content')
+    @php
+        use Carbon\Carbon;
+    @endphp
     <!--team section-->
     <section class="team-section section">
         <div class="container">
             <div class="section-title ">
                 <h3 class="text-center">{{ $title }}
-                    @if (date('H:i') > $konter->time_close || date('H:i') < $konter->time_open)
+                    @if (Carbon::now()->between(Carbon::parse($konter->time_close), Carbon::parse($konter->time_open)))
                         <span class="badge badge-danger text-white">TUTUP</span>
                     @else
                         <span class="badge badge-success text-white">BUKA</span>
