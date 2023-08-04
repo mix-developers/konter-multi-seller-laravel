@@ -34,16 +34,18 @@ class LaporanController extends Controller
     public function exportService(Request $request)
     {
         // dd($request);
+        $konter = Konter::where('id_pemilik', Auth::user()->id)->first();
         $from_date = date("d-m-Y", strtotime($request->from_date));
         $to_date = date("d-m-Y", strtotime($request->to_date));
-        $data = Service::whereBetween('date', [$from_date, $to_date])->get();
+        $data = Service::where('id_konter', $konter->id)->where('date', '>=', $from_date)->where('date', '>=', $from_date)->get();
+        $data2 = Service::where('id_konter', $konter->id)->get();
 
         $pdf = FacadePdf::loadView('konter.laporan.pdf.export_service', [
-            'data' => $data,
+            'data' => $data2,
             'from_date' => $from_date,
             'to_date' => $to_date,
         ])->setPaper('a4', 'landscape')->setOption(['dpi' => 150, 'defaultFont' => 'arial']);
-
+        // dd($data, $data2);
         return $pdf->stream($from_date . ' sampai ' . $to_date . '.pdf');
     }
     public function exportProduk()

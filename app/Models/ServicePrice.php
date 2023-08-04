@@ -31,28 +31,21 @@ class ServicePrice extends Model
     }
 
     // Dashboard admin
-
     public static function getIncomeMonthly()
     {
-        $month_before = Carbon::now()->startOfMonth()->subMonth(1);
-        $month_now = Carbon::now()->startOfMonth();
-        $income_before_month = self::whereMonth('created_at', $month_before)->sum('price');
-        $income_after_month = self::whereMonth('created_at', $month_now)->sum('price');
+        $monthBefore = Carbon::now()->startOfMonth()->subMonth(1);
+        $monthNow = Carbon::now()->startOfMonth();
 
-        return $income_after_month - $income_before_month;
+        return self::whereBetween('created_at', [$monthBefore, $monthNow])->sum('price');
     }
-
     public static function getIncomeMonthlyBefore()
     {
-        $month_before = Carbon::now()->startOfMonth()->subMonth(1);
-        return self::whereMonth('created_at', $month_before)->sum('price');
+        return self::whereMonth('created_at', Carbon::now()->startOfMonth()->subMonth(1))->sum('price');
     }
-
     public static function getIncomeMonthlyNow()
     {
         return self::whereMonth('created_at', Carbon::now()->startOfMonth())->sum('price');
     }
-
     public static function getIncomeMonthlyPercent()
     {
         $month_before = self::getIncomeMonthlyBefore();

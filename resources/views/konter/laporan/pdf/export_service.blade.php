@@ -31,6 +31,7 @@
             <thead>
                 <tr>
                     <th rowspan="2" class="no">#</th>
+                    <th rowspan="2" class="no">Tanggal</th>
                     <th rowspan="2" class="no">Kode service</th>
                     <th rowspan="2" class="no">Layanan</th>
                     <th rowspan="2" class="no">Total Harga</th>
@@ -45,8 +46,10 @@
                 @foreach ($data as $item)
                     <tr>
                         <td width="10">{{ $loop->iteration }}</td>
+                        <td>{{ $item->date }}</td>
                         <td>
-                            {{ $item->code }}
+                            <strong>{{ $item->code }}</strong><br>
+                            <span class="text-muted">{{ $item->pelanggan->name }}</span>
                         </td>
                         <td>
                             {{ $item->layanan->layanan }}

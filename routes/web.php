@@ -14,7 +14,6 @@ use App\Http\Controllers\ProdukStokController;
 use App\Http\Controllers\PusherController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StatusController;
-use App\Models\ProdukStok;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,11 +44,11 @@ Route::get('/status/{code}', [MemberController::class, 'status'])->name('status'
 Auth::routes();
 // Admin Routes
 Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/akun/admin', [App\Http\Controllers\UserController::class, 'admin'])->name('akun.admin');
-    Route::get('/akun/konter', [App\Http\Controllers\UserController::class, 'konter'])->name('akun.konter');
-    Route::get('/akun/user', [App\Http\Controllers\UserController::class, 'user'])->name('akun.user');
-    Route::get('/akun/akun', [App\Http\Controllers\UserController::class, 'akunAdmin'])->name('akun.akun');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/akun/admin', [UserController::class, 'admin'])->name('akun.admin');
+    Route::get('/akun/konter', [UserController::class, 'konter'])->name('akun.konter');
+    Route::get('/akun/user', [UserController::class, 'user'])->name('akun.user');
+    Route::get('/akun/akun', [UserController::class, 'akunAdmin'])->name('akun.akun');
     Route::get('produk', [ProdukController::class, 'index'])->name('produk');
     Route::get('konter', [KonterTokoController::class, 'index'])->name('konter');
     Route::post('konter/store', [KonterTokoController::class, 'store'])->name('konter.store');
@@ -71,7 +70,7 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
 });
 // Konter Routes
 Route::prefix('konter')->middleware('konter')->name('konter.')->group(function () {
-    Route::get('/', [App\Http\Controllers\KonterController::class, 'index'])->name('home');
+    Route::get('/', [KonterController::class, 'index'])->name('home');
     Route::post('konter/store', [KonterTokoController::class, 'store'])->name('konter.store');
     Route::get('layanan', [LayananKonterController::class, 'index'])->name('layanan');
     Route::post('layanan/store', [LayananKonterController::class, 'store'])->name('layanan.store');
@@ -98,7 +97,7 @@ Route::prefix('konter')->middleware('konter')->name('konter.')->group(function (
     Route::delete('service/destroy/{id}', [ServiceController::class, 'destroy'])->name('service.destroy');
     Route::delete('service/destroyStatus/{id}', [ServiceController::class, 'destroyStatus'])->name('service.destroyStatus');
     Route::delete('service/destroyPrice/{id}', [ServiceController::class, 'destroyPrice'])->name('service.destroyPrice');
-    Route::get('user/akun', [App\Http\Controllers\UserController::class, 'akunKonter'])->name('konter.user.akun');
+    Route::get('user/akun', [UserController::class, 'akunKonter'])->name('konter.user.akun');
     Route::get('ulasan', [KonterController::class, 'ulasan'])->name('ulasan');
     Route::get('chat', [ChatController::class, 'index'])->name('chat');
     Route::post('laporan/exportService', [LaporanController::class, 'exportService'])->name('laporan.exportService');
@@ -106,11 +105,11 @@ Route::prefix('konter')->middleware('konter')->name('konter.')->group(function (
 });
 // Member Routes
 Route::prefix('member')->middleware('user')->name('member.')->group(function () {
-    Route::get('/', [App\Http\Controllers\MemberController::class, 'index'])->name('home');
-    Route::get('/ulasan', [App\Http\Controllers\MemberController::class, 'ulasan'])->name('ulasan');
-    Route::get('/status_service', [App\Http\Controllers\MemberController::class, 'status_service'])->name('status_service');
-    Route::get('/ubah_password', [App\Http\Controllers\MemberController::class, 'ubah_password'])->name('ubah_password');
-    Route::get('/status/{code}', [App\Http\Controllers\MemberController::class, 'status'])->name('status');
+    Route::get('/', [MemberController::class, 'index'])->name('home');
+    Route::get('/ulasan', [MemberController::class, 'ulasan'])->name('ulasan');
+    Route::get('/status_service', [MemberController::class, 'status_service'])->name('status_service');
+    Route::get('/ubah_password', [MemberController::class, 'ubah_password'])->name('ubah_password');
+    Route::get('/status/{code}', [MemberController::class, 'status'])->name('status');
     Route::post('service/storeFinish', [ServiceController::class, 'storeFinish'])->name('service.storeFinish');
     Route::post('service/storeRating', [ServiceController::class, 'storeRating'])->name('service.storeRating');
     Route::post('/sendChat', [MemberController::class, 'sendChat'])->name('sendChat');

@@ -4,6 +4,7 @@
             <tr>
                 <th rowspan="2" class="align-middle">#</th>
                 <th rowspan="2" class="align-middle">Thumbnail</th>
+                <th rowspan="2" class="align-middle">Tanggal</th>
                 <th rowspan="2" class="align-middle">Kode service</th>
                 <th rowspan="2" class="align-middle">Layanan</th>
                 <th rowspan="2" class="align-middle">Total Harga</th>
@@ -29,8 +30,10 @@
                             </div>
                         </div>
                     </td>
+                    <td>{{ $item->date }}</td>
                     <td>
-                        {{ $item->code }}
+                        <strong>{{ $item->code }}</strong><br>
+                        <span class="text-muted">{{ $item->pelanggan->name }}</span>
                     </td>
                     <td>
                         {{ $item->layanan->layanan }}
