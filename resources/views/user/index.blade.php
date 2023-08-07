@@ -18,30 +18,34 @@
                     @include('user.menu_user')
                 </div>
                 <div class="col-lg-9 col-md-8">
-                    <div class="card shadow shadow-sm rounded">
-                        <div class="card-header">
-                            <strong>Informasi Akun</strong>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="name">Nama Lengkap</label>
-                                <input type="text" class="form-control " name="name" value="{{ $user->name }}">
+                    <form method="POST" action="{{ url('/member/user/update', $user->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="card shadow shadow-sm rounded">
+                            <div class="card-header">
+                                <strong>Informasi Akun</strong>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control " name="email" value="{{ $user->email }}">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="name">Nama Lengkap</label>
+                                    <input type="text" class="form-control " name="name" value="{{ $user->name }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control " name="email" value="{{ $user->email }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Nomor HP</label>
+                                    <input type="text" class="form-control " name="phone" value="{{ $user->phone }}">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="phone">Nomor HP</label>
-                                <input type="text" class="form-control " name="phone" value="{{ $user->phone }}">
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-info">Simpan Perubahan</button>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-info">Simpan Perubahan</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 @endsection

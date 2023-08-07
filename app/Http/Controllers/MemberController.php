@@ -43,6 +43,7 @@ class MemberController extends Controller
     {
         $data = [
             'title' => 'Ubah Password Anda',
+            'user' => User::find(Auth::user()->id),
         ];
         return view('user.ubah_password', $data);
     }

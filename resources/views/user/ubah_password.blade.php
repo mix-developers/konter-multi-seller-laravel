@@ -18,21 +18,25 @@
                     @include('user.menu_user')
                 </div>
                 <div class="col-lg-9 col-md-8">
-                    <div class="card shadow shadow-sm rounded">
-                        <div class="card-header">
-                            <strong>Ubah Password akun</strong>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control " name="password" required>
-                                <small>*kosongkan jika tidak ingin mengganti password anda</small>
+                    <form method="POST" action="{{ url('/member/user/update', $user->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="card shadow shadow-sm rounded">
+                            <div class="card-header">
+                                <strong>Ubah Password akun</strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control " name="password">
+                                    <small>*kosongkan jika tidak ingin mengganti password anda</small>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-info">Simpan Password</button>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-info">Simpan Password</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

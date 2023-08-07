@@ -120,4 +120,5 @@ Route::prefix('member')->middleware('user')->name('member.')->group(function () 
     Route::post('service/storeRating', [ServiceController::class, 'storeRating'])->name('service.storeRating');
     Route::post('/sendChat', [MemberController::class, 'sendChat'])->name('sendChat');
     Route::any('/sendChatAjax', [MemberController::class, 'sendChatAjax'])->name('sendChatAjax');
+    Route::put('user/update/{id}', [UserController::class, 'update'])->name('konter.user.update');
 });

@@ -118,9 +118,9 @@
             <div class="section-title ">
                 <h3 class="text-center">{{ $title }}
                     @if (Carbon::now()->between(Carbon::parse($konter->time_close), Carbon::parse($konter->time_open)))
-                        <span class="badge badge-danger text-white">TUTUP</span>
-                    @else
                         <span class="badge badge-success text-white">BUKA</span>
+                    @else
+                        <span class="badge badge-danger text-white">TUTUP</span>
                     @endif
 
                 </h3>
