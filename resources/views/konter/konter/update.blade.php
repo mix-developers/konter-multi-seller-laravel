@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="form-group ">
                                     <label>Deskripsi Konter</label>
-                                    <textarea class="ckeditor" name="description" id="description" cols="30" rows="4">{!! $konter->description !!}"</textarea>
+                                    <textarea class="ckeditor" name="description" id="description" cols="30" rows="4">{!! $konter->description !!}</textarea>
                                 </div>
                                 <button type="submit" class="btn  btn-primary">Simpan</button>
                             </form>
