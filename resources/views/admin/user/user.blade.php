@@ -32,9 +32,9 @@
                                     {{-- <a href="{{ route('dashboard.galeri.create') }}"
                                         class="btn btn-success btn-md mb-3 btn-round"><i class="feather f-16 icon-plus"></i>
                                         Tambah</a> --}}
-                                    <button type="button" class="btn btn-success btn-md mb-3 btn-round" data-toggle="modal"
+                                    {{-- <button type="button" class="btn btn-success btn-md mb-3 btn-round" data-toggle="modal"
                                         data-target=".tambah"><i class="feather f-16 icon-plus"></i>
-                                        Tambah</button>
+                                        Tambah</button> --}}
                                 </div>
                             </div>
                             <div class="table-responsive">
