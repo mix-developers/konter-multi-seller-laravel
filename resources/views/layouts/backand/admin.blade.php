@@ -139,7 +139,6 @@
                             <span class="badge badge-danger pc-h-badge dots"><span class="sr-only"></span></span>
                         </a>
                     </li>
-
                     <li class="dropdown pc-h-item">
                         <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
@@ -154,10 +153,17 @@
                             <div class=" dropdown-header">
                                 <h6 class="text-overflow m-0">Welcome !</h6>
                             </div>
-                            <a href="{{ url('konter/user/akun') }}" class="dropdown-item">
-                                <i data-feather="user"></i>
-                                <span>Akun</span>
-                            </a>
+                            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super_admin')
+                                <a href="{{ url('admin/user/akun') }}" class="dropdown-item">
+                                    <i data-feather="user"></i>
+                                    <span>Akun</span>
+                                </a>
+                            @elseif(Auth::user()->role == 'konter')
+                                <a href="{{ url('konter/user/akun') }}" class="dropdown-item">
+                                    <i data-feather="user"></i>
+                                    <span>Akun</span>
+                                </a>
+                            @endif
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                           document.getElementById('logout-form').submit();"
@@ -165,7 +171,6 @@
                                 <i data-feather="power"></i>
                                 <span>Logout</span>
                             </a>
-
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>

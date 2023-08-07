@@ -11,6 +11,15 @@
             <div class="row">
                 <!-- subscribe start -->
                 <div class="col-md-12">
+                    <div class="col-md-12">
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $item)
+                                <div class="alert alert-danger" role="alert">
+                                    {{ $item }}
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <h5>{{ $title }}</h5>
@@ -23,9 +32,9 @@
                                     {{-- <a href="{{ route('dashboard.galeri.create') }}"
                                         class="btn btn-success btn-md mb-3 btn-round"><i class="feather f-16 icon-plus"></i>
                                         Tambah</a> --}}
-                                    <button type="button" class="btn btn-success btn-md mb-3 btn-round" data-toggle="modal"
+                                    {{-- <button type="button" class="btn btn-success btn-md mb-3 btn-round" data-toggle="modal"
                                         data-target=".tambah"><i class="feather f-16 icon-plus"></i>
-                                        Tambah</button>
+                                        Tambah</button> --}}
                                 </div>
                             </div>
                             <div class="table-responsive">

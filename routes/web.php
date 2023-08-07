@@ -69,6 +69,9 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::put('status/update/{id}', [StatusController::class, 'update'])->name('status.update');
     Route::delete('status/destroy/{id}', [StatusController::class, 'destroy'])->name('status.destroy');
     Route::get('laporan', [LaporanController::class, 'admin'])->name('laporan');
+    Route::get('user/akun', [UserController::class, 'akunKonter'])->name('konter.user.akun');
+    Route::post('user/store', [UserController::class, 'store'])->name('konter.user.store');
+    Route::put('user/update/{id}', [UserController::class, 'update'])->name('konter.user.update');
 });
 // Konter Routes
 Route::prefix('konter')->middleware('konter')->name('konter.')->group(function () {
@@ -100,6 +103,7 @@ Route::prefix('konter')->middleware('konter')->name('konter.')->group(function (
     Route::delete('service/destroyStatus/{id}', [ServiceController::class, 'destroyStatus'])->name('service.destroyStatus');
     Route::delete('service/destroyPrice/{id}', [ServiceController::class, 'destroyPrice'])->name('service.destroyPrice');
     Route::get('user/akun', [UserController::class, 'akunKonter'])->name('konter.user.akun');
+    Route::put('user/update/{id}', [UserController::class, 'update'])->name('konter.user.update');
     Route::get('ulasan', [KonterController::class, 'ulasan'])->name('ulasan');
     Route::get('chat', [ChatController::class, 'index'])->name('chat');
     Route::post('laporan/exportService', [LaporanController::class, 'exportService'])->name('laporan.exportService');
