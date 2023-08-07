@@ -6,11 +6,19 @@
             @include('layouts.backand.title')
 
             <div class="row">
-                @if (App\Models\ServicePrice::getIncomeMonthlyBefore() <= $income)
+                @if (App\Models\ServicePrice::getIncomeMonthlyBefore() < $income)
                     <div class="col-12">
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>Hi, {{ Auth::user()->name }}!</strong> Pendapatan service bulan ini naik sebesar
                             <strong>{{ App\Models\ServicePrice::getIncomeMonthlyPercent() }}%</strong>.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+                        </div>
+                    </div>
+                @elseif(App\Models\ServicePrice::getIncomeMonthlyBefore() == $income)
+                    <div class="col-12">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Hi, {{ Auth::user()->name }}!</strong> Pendapatan service bulan ini STABIL.
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                                     aria-hidden="true">×</span></button>
                         </div>

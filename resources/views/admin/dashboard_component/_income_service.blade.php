@@ -12,8 +12,10 @@
             <div class="row d-flex align-items-center">
                 <div class="col-9">
                     <h3 class="f-w-300 d-flex align-items-center ">
-                        @if (App\Models\ServicePrice::getIncomeMonthlyBefore() <= $income)
+                        @if (App\Models\ServicePrice::getIncomeMonthlyBefore() < $income)
                             <i class="feather icon-arrow-up text-success f-30 m-r-10"></i>
+                        @elseif (App\Models\ServicePrice::getIncomeMonthlyBefore() == $income)
+                            <i class="feather icon-activity text-success f-30 m-r-10"></i>
                         @else
                             <i class="feather icon-arrow-down text-danger f-30 m-r-10"></i>
                         @endif
