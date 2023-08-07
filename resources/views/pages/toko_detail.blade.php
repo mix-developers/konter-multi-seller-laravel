@@ -202,6 +202,10 @@
                                     <li><a href="#"><strong>Jam Buka : </strong>{{ $konter->time_open }} -
                                             {{ $konter->time_close }} WIT</a>
                                     </li>
+                                    <li><a href="https://wa.me/+{{ $konter->pemilik->phone }}" target="__blank"
+                                            class="btn btn-success btn-sm text-white"><i class="fab fa-whatsapp"></i>
+                                            Hubungi WA</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="categorise-menu">

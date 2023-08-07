@@ -74,7 +74,8 @@
                                         </tr>
                                     </table>
                                     <div class="mt-2">
-                                        <a href="" class="btn btn-light-success btn-md" target="__blank">
+                                        <a href="https://wa.me/+{{ $service->pelanggan->phone }}"
+                                            class="btn btn-light-success btn-md" target="__blank">
                                             <i class="fab fa-whatsapp"></i> Hubungi Pelanggan
                                         </a>
                                         @if ($service->deleted_at == null)
