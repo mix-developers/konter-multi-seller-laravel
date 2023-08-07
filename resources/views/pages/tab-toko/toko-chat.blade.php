@@ -60,52 +60,43 @@
     @endguest
 </div>
 @section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.11.0/echo.min.js"></script>
+    <script>
+        window.chatChannel = 'chat.{{ $konter->id_pemilik }}';
+    </script>
+    <script>
+        import Echo from 'laravel-echo';
 
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        window.Pusher = require('pusher-js');
+
+        // Initialize Echo
+        window.Echo = new Echo({
+            broadcaster: 'pusher',
+            key: '{{ config('broadcasting.connections.pusher.key') }}',
+            cluster: '{{ config('broadcasting.connections.pusher.options.cluster') }}',
+            encrypted: true,
+            authEndpoint: '/broadcasting/auth', // Adjust this to your broadcasting route
+            auth: {
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
             }
         });
 
-        $(".btn-submit").click(function(e) {
+        // Listen for chat events
+        if (typeof window.chatChannel !== 'undefined') {
+            window.Echo.private(window.chatChannel)
+                .listen('ChatEvent', function(event) {
+                    var message = event.message;
+                    var messageType = (event.from_user === {{ Auth::user()->id }}) ?
+                        'bg-success text-white float-left' : 'bg-info text-white float-right';
 
-            e.preventDefault();
+                    var messageDiv = '<div class="' + messageType + ' py-1 px-2" style="border-radius:10px;">' +
+                        '<strong>' + message + '</strong>' +
+                        '</div><br><br>';
 
-            var id_konter = $("#id_konter").val();
-            var to_user = $("#to_user").val();
-            var from_user = $("#from_user").val();
-            var content = $("#content").val();
-
-            $.ajax({
-                type: 'POST',
-                url: "{{ url('member/sendChatAjax') }}",
-                data: {
-                    id_konter: id_konter,
-                    to_user: to_user,
-                    from_user: from_user,
-                    content: content,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(data) {
-                    if ($.isEmptyObject(data.error)) {
-                        alert(data.success);
-                        location.reload();
-                    } else {
-                        printErrorMsg(data.error);
-                    }
-                }
-            });
-
-        });
-
-        function printErrorMsg(msg) {
-            $(".print-error-msg").find("ul").html('');
-            $(".print-error-msg").css('display', 'block');
-            $.each(msg, function(key, value) {
-                $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
-            });
+                    $('.overflow-auto').append(messageDiv);
+                });
         }
     </script>
 @endsection

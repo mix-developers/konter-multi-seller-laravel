@@ -9,6 +9,15 @@
             <!-- [ breadcrumb ] end -->
             <!-- [ Main Content ] start -->
             <div class="row">
+                <div class="col-md-12">
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $item)
+                            <div class="alert alert-danger" role="alert">
+                                {{ $item }}
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
                 <!-- subscribe start -->
                 <div class="col-md-12">
                     <div class="card">

@@ -63,7 +63,6 @@ class KonterTokoController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'id_pemilik' => ['required'],
             'time_open' => ['required'],
             'time_close' => ['required'],
             'address' => ['required'],
@@ -81,7 +80,7 @@ class KonterTokoController extends Controller
 
         $konter->name = $request->name;
         $konter->slug = Str::slug($request->name);
-        $konter->id_pemilik = $request->id_pemilik;
+        $konter->id_pemilik = $konter->id_pemilik;
         $konter->time_open = $request->time_open;
         $konter->time_close = $request->time_close;
         $konter->description = $request->description;
@@ -89,7 +88,6 @@ class KonterTokoController extends Controller
         $konter->maps = $request->maps;
         $konter->thumbnail = isset($file_path) ? $file_path : $konter->thumbnail;
         if ($konter->save()) {
-
             return redirect()->back()->with('success', 'Berhasil menambahkan data');
         } else {
             return redirect()->back()->with('danger', 'Gagal menambahkan data');
