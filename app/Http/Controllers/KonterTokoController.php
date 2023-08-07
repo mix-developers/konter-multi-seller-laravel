@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Konter;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -18,6 +19,15 @@ class KonterTokoController extends Controller
             'pemilik' => User::where('role', 'konter')->get(),
         ];
         return view('admin.konter.index', $data);
+    }
+    public function konter()
+    {
+        $data = [
+            'title' => 'Update Konter',
+            'konter' => Konter::where('id_pemilik', Auth::user()->id)->first(),
+            'pemilik' => User::where('role', 'konter')->get(),
+        ];
+        return view('konter.konter.update', $data);
     }
     public function store(Request $request)
     {

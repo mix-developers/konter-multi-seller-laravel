@@ -76,6 +76,8 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
 // Konter Routes
 Route::prefix('konter')->middleware('konter')->name('konter.')->group(function () {
     Route::get('/', [KonterController::class, 'index'])->name('home');
+    Route::get('/update_konter', [KonterTokoController::class, 'konter'])->name('update_konter');
+    Route::put('/konter/update/{id}', [KonterTokoController::class, 'update'])->name('konter.update');
     Route::post('konter/store', [KonterTokoController::class, 'store'])->name('konter.store');
     Route::get('layanan', [LayananKonterController::class, 'index'])->name('layanan');
     Route::post('layanan/store', [LayananKonterController::class, 'store'])->name('layanan.store');

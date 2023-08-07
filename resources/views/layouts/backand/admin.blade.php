@@ -159,6 +159,10 @@
                                     <span>Akun</span>
                                 </a>
                             @elseif(Auth::user()->role == 'konter')
+                                <a href="{{ url('konter/update_konter') }}" class="dropdown-item">
+                                    <i data-feather="home"></i>
+                                    <span>Konter</span>
+                                </a>
                                 <a href="{{ url('konter/user/akun') }}" class="dropdown-item">
                                     <i data-feather="user"></i>
                                     <span>Akun</span>

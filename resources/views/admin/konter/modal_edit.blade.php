@@ -12,6 +12,7 @@
                 <form method="POST" action="{{ url('/admin/konter/update', $item->id) }}"
                     enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="form-group">
                         <label for="name">Foto Konter</label>
                         <input type="file" class="form-control @error('thumbanil') is-invalid @enderror"
