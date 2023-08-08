@@ -44,7 +44,7 @@
                                             <th>#</th>
                                             <th>Avatar</th>
                                             <th>Nama Akun</th>
-                                            {{-- <th>Aksi</th> --}}
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -68,22 +68,22 @@
                                                     {{ $item->name }}<br>
                                                     <p class="text-muted">{{ $item->email }}</p>
                                                 </td>
-                                                {{-- <td width="200">
+                                                <td width="200">
 
                                                     <button type="button" class="btn btn-light-warning btn-md"
                                                         data-toggle="modal" data-target=".edit-{{ $item->id }}"><i
                                                             class="icon feather icon-edit f-16"></i>
                                                         Edit</button>
                                                     @include('admin.user.modal_edit')
-                                                    <form method="POST" action="" class="d-inline-block">
+                                                    {{-- <form method="POST" action="" class="d-inline-block">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit"
                                                             class="btn btn-light-danger btn-md delete-button"><i
                                                                 class="feather icon-trash-2  f-16 "></i> Delete
                                                         </button>
-                                                    </form>
-                                                </td> --}}
+                                                    </form> --}}
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

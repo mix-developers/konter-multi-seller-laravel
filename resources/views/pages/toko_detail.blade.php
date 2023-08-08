@@ -143,6 +143,7 @@
                                                 <h4 class="text-danger">Rp {{ number_format($item->price) }}</h4>
 
                                                 <h5 style="color:black;" class="pb-3">{{ $item->name }}</h5>
+                                                <span>Konter : {{ $namaKonter }}</span><br>
                                                 <button type="button" class="btn btn-main" data-toggle="modal"
                                                     data-target="#produk-{{ $item->slug }}">
                                                     Detail Produk

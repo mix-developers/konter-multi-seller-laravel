@@ -59,44 +59,47 @@
         @endif
     @endguest
 </div>
-@section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.11.0/echo.min.js"></script>
-    <script>
-        window.chatChannel = 'chat.{{ $konter->id_pemilik }}';
-    </script>
-    <script>
-        import Echo from 'laravel-echo';
+@guest
+@else
+    @section('script')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.11.0/echo.min.js"></script>
+        <script>
+            window.chatChannel = 'chat.{{ $konter->id_pemilik }}';
+        </script>
+        <script>
+            import Echo from 'laravel-echo';
 
-        window.Pusher = require('pusher-js');
+            window.Pusher = require('pusher-js');
 
-        // Initialize Echo
-        window.Echo = new Echo({
-            broadcaster: 'pusher',
-            key: '{{ config('broadcasting.connections.pusher.key') }}',
-            cluster: '{{ config('broadcasting.connections.pusher.options.cluster') }}',
-            encrypted: true,
-            authEndpoint: '/broadcasting/auth', // Adjust this to your broadcasting route
-            auth: {
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            // Initialize Echo
+            window.Echo = new Echo({
+                broadcaster: 'pusher',
+                key: '{{ config('broadcasting.connections.pusher.key') }}',
+                cluster: '{{ config('broadcasting.connections.pusher.options.cluster') }}',
+                encrypted: true,
+                authEndpoint: '/broadcasting/auth', // Adjust this to your broadcasting route
+                auth: {
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
                 }
+            });
+
+            // Listen for chat events
+            if (typeof window.chatChannel !== 'undefined') {
+                window.Echo.private(window.chatChannel)
+                    .listen('ChatEvent', function(event) {
+                        var message = event.message;
+                        var messageType = (event.from_user === {{ Auth::user()->id }}) ?
+                            'bg-success text-white float-left' : 'bg-info text-white float-right';
+
+                        var messageDiv = '<div class="' + messageType + ' py-1 px-2" style="border-radius:10px;">' +
+                            '<strong>' + message + '</strong>' +
+                            '</div><br><br>';
+
+                        $('.overflow-auto').append(messageDiv);
+                    });
             }
-        });
-
-        // Listen for chat events
-        if (typeof window.chatChannel !== 'undefined') {
-            window.Echo.private(window.chatChannel)
-                .listen('ChatEvent', function(event) {
-                    var message = event.message;
-                    var messageType = (event.from_user === {{ Auth::user()->id }}) ?
-                        'bg-success text-white float-left' : 'bg-info text-white float-right';
-
-                    var messageDiv = '<div class="' + messageType + ' py-1 px-2" style="border-radius:10px;">' +
-                        '<strong>' + message + '</strong>' +
-                        '</div><br><br>';
-
-                    $('.overflow-auto').append(messageDiv);
-                });
-        }
-    </script>
-@endsection
+        </script>
+    @endsection
+@endguest

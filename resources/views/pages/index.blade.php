@@ -39,6 +39,7 @@
                         'price' => $item->price,
                         'name' => $item->name,
                         'modalTarget' => '#produk-' . $item->slug,
+                        'namaKonter' => $item->konter->name,
                     ])
                     @endcomponent
                 @endforeach

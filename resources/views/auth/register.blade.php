@@ -8,11 +8,19 @@
                 <div class="row align-items-center text-center">
                     <div class="col-md-12">
                         <div class="card-body">
+
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
                                 {{-- <img src="assets/images/logo-dark.svg" alt="" class="img-fluid mb-4"> --}}
                                 <h1><a href="{{ url('/') }}" class="text-primary">SimVice</a></h1>
                                 <h4 class="mb-3 f-w-400 ">Sign up</h4>
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $item)
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ $item }}
+                                        </div>
+                                    @endforeach
+                                @endif
 
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
