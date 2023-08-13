@@ -207,9 +207,9 @@
                                         <h5 class="mb-2">Beri rating dan ulasan</h5>
                                         <hr>
                                         <form class="py-2 px-4" action="{{ url('/member/service/storeRating') }}"
-                                            method="POST" autocomplete="off">
+                                            method="POST" autocomplete="off" enctype="multipart/form-data">
                                             @csrf
-                                            <div class="form-group row justify-content-center">
+                                            <div class="form-group row d-flex justify-content-center">
                                                 <input type="hidden" name="id_service" value="{{ $service->id }}">
                                                 <input type="hidden" name="id_konter" value="{{ $service->konter->id }}">
                                                 <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
@@ -233,6 +233,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="my-2">
+                                                <label>Sertakan Foto ?</label>
+                                                <input type="file" class="form-control" name="thumbnail">
+                                            </div>
                                             <div class="form-group row mt-4">
                                                 <div class="col">
                                                     <textarea class="form-control" name="comments" rows="6 " placeholder="Ulasan anda" maxlength="200"></textarea>
@@ -253,6 +257,12 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col mt-4">
+                                                    @if ($rating->thumbnail != '')
+                                                        <div class="mb-4">
+                                                            <img src="{{ url(Storage::url($rating->thumbnail)) }}"
+                                                                height="100px" alt="gambar reviewer">
+                                                        </div>
+                                                    @endif
                                                     <div class="form-group ">
                                                         <div class="ratings text-center">
                                                             @for ($i = 1; $i <= $rating->star_rating; $i++)

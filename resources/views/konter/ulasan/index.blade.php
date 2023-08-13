@@ -22,6 +22,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Code Service</th>
+                                            <th>Foto</th>
                                             <th>Rating</th>
                                             <th>Ulasan</th>
                                         </tr>
@@ -33,6 +34,19 @@
                                                 <td>
                                                     <a href="{{ url('konter/service/detail', $item->service->id) }}"
                                                         class="text-link">{{ $item->service->code }}</a>
+                                                </td>
+                                                <td width="150">
+                                                    <div class="thumbnail">
+                                                        <div class="thumb">
+                                                            <a href="{{ $item->thumbnail == '' ? asset('img/user.png') : url(Storage::url($item->thumbnail)) }}"
+                                                                data-lightbox="1" data-title="{{ $item->judul }}"
+                                                                data-toggle="lightbox" target="__blank">
+                                                                <img src="{{ $item->thumbnail == '' ? asset('img/user.png') : url(Storage::url($item->thumbnail)) }}"
+                                                                    alt="{{ $item->name }}"
+                                                                    class="img-fluid img-thumbnail" width="50">
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     @for ($i = 1; $i <= $item->star_rating; $i++)

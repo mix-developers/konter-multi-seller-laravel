@@ -50,11 +50,11 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-block btn-info mb-4">Signin</button>
-                                {{-- <p class="mb-2 text-muted">Forgot password?
+                                <p class="mb-2 text-muted">Lupa password?
                                     @if (Route::has('password.request'))
                                         <a href="{{ route('password.request') }}" class="f-w-400">Reset</a>
                                     @endif
-                                </p> --}}
+                                </p>
                                 <p class="mb-0 text-muted">Belum Memiliki Akun ? <a href="{{ route('register') }}"
                                         class="f-w-400">Daftar</a></p>
                             </div>

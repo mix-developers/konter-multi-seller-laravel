@@ -169,14 +169,20 @@ class ServiceController extends Controller
         $request->validate([
             'id_service' => ['required'],
             'id_konter' => ['required'],
+            'thumbnail' => ['nullable', 'mimes:jpeg,png,jpg,gif'],
             'id_user' => ['required'],
         ]);
+        if ($request->hasFile('thumbnail')) {
+            $filename = Str::random(32) . '.' . $request->file('thumbnail')->getClientOriginalExtension();
+            $file_path = $request->file('thumbnail')->storeAs('public/uploads', $filename);
+        }
 
         $rating = new ReviewRating();
         $rating->id_service = $request->id_service;
         $rating->id_konter = $request->id_konter;
         $rating->id_user = $request->id_user;
         $rating->comments = $request->comments;
+        $rating->thumbnail = isset($file_path) ? $file_path : '';
         $rating->star_rating = $request->star_rating;
         $rating->date = date('d-m-Y');
 

@@ -12,6 +12,12 @@
                             <span>{{ $item->user->name }}</span>
                         </td>
                         <td>
+                            @if ($item->thumbnail != '')
+                                <div class="mb-4">
+                                    <img src="{{ url(Storage::url($item->thumbnail)) }}" height="100px"
+                                        alt="gambar reviewer">
+                                </div>
+                            @endif
                             <div class="ratings">
                                 @for ($i = 1; $i <= $item->star_rating; $i++)
                                     <i class="fa fa-star text-warning"></i>

@@ -43,9 +43,9 @@ Route::post('/receive', [PusherController::class, 'receive']);
 
 Route::get('/status/{code}', [MemberController::class, 'status'])->name('status');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 // Admin Routes
-Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware(['admin', 'verified'])->name('admin.')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/akun/admin', [UserController::class, 'admin'])->name('akun.admin');
     Route::get('/akun/konter', [UserController::class, 'konter'])->name('akun.konter');
@@ -74,7 +74,7 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::put('user/update/{id}', [UserController::class, 'update'])->name('konter.user.update');
 });
 // Konter Routes
-Route::prefix('konter')->middleware('konter')->name('konter.')->group(function () {
+Route::prefix('konter')->middleware(['konter', 'verified'])->name('konter.')->group(function () {
     Route::get('/', [KonterController::class, 'index'])->name('home');
     Route::get('/update_konter', [KonterTokoController::class, 'konter'])->name('update_konter');
     Route::put('/konter/update/{id}', [KonterTokoController::class, 'update'])->name('konter.update');
@@ -112,7 +112,7 @@ Route::prefix('konter')->middleware('konter')->name('konter.')->group(function (
     Route::get('laporan/exportProduk', [LaporanController::class, 'exportProduk'])->name('laporan.exportProduk');
 });
 // Member Routes
-Route::prefix('member')->middleware('user')->name('member.')->group(function () {
+Route::prefix('member')->middleware(['user', 'verified'])->name('member.')->group(function () {
     Route::get('/', [MemberController::class, 'index'])->name('home');
     Route::get('/ulasan', [MemberController::class, 'ulasan'])->name('ulasan');
     Route::get('/status_service', [MemberController::class, 'status_service'])->name('status_service');
