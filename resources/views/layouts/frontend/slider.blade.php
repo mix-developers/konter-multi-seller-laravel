@@ -12,9 +12,10 @@
                             <h2 class="text-white text-bold mb-2" data-animation-in="slideInLeft">SimVice</h2>
                             <p class="tag-text mb-4" data-animation-in="slideInRight">Menghubungkan anda pada tempat
                                 service leptop terbaik untuk anda</p>
-                            
-                            <a href="{{ url('/register') }}" class="btn btn-main btn-white"
-                                data-animation-in="slideInLeft" data-duration-in="1.2">Daftar Akun</a>
+                            @guest
+                                <a href="{{ url('/register') }}" class="btn btn-main btn-white"
+                                    data-animation-in="slideInLeft" data-duration-in="1.2">Daftar Akun</a>
+                            @endguest
                         </div>
                         <!-- Slide Content End -->
                     </div>
@@ -31,9 +32,10 @@
                             <h2 class="text-white" data-animation-in="slideInRight">SimVice</h2>
                             <p class="tag-text mb-4" data-animation-in="slideInRight" data-duration-in="0.6">Terpercaya
                                 dengan fitur tracking service</p>
-                            
-                            <a href="{{ url('/register') }}" class="btn btn-main btn-white"
-                                data-animation-in="slideInLeft" data-duration-in="1.2">Daftar Akun</a>
+                            @guest
+                                <a href="{{ url('/register') }}" class="btn btn-main btn-white"
+                                    data-animation-in="slideInLeft" data-duration-in="1.2">Daftar Akun</a>
+                            @endguest
                         </div>
                         <!-- Slide Content End-->
                     </div>
@@ -51,9 +53,10 @@
                             </h2>
                             <p class="tag-text mb-4" data-animation-in="slideInLeft">Solusi mencari tempat service
                                 leptop</p>
-                            <
+                            @guest
                                 <a href="{{ url('/register') }}" class="btn btn-main btn-white"
                                     data-animation-in="slideInLeft" data-duration-in="1.2">Daftar Akun</a>
+                            @endguest
                         </div>
                         <!-- Slide Content End -->
                     </div>
