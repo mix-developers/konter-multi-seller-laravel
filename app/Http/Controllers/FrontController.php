@@ -39,17 +39,17 @@ class FrontController extends Controller
         $konter = Konter::where('slug', $slug)->first();
         $layanan = LayananKonter::getLayananKonter($konter->id);
         $rating = ReviewRating::where('id_konter', $konter->id)->get();
-        if (Auth::check()) {
-            $chat = Chat::where('from_user', Auth::user()->id)->orWhere('to_user', Auth::user()->id)->where('id_konter', $konter->id)->get();
-        } else {
-            $chat = '';
-        }
+        // if (Auth::check()) {
+        //     $chat = Chat::where('from_user', Auth::user()->id)->orWhere('to_user', Auth::user()->id)->where('id_konter', $konter->id)->get();
+        // } else {
+        //     $chat = '';
+        // }
         $data = [
             'title' => 'Informasi Konter : ' . $konter->name,
             'konter' => $konter,
             'layanan' => $layanan,
             'rating' => $rating,
-            'chat' => $chat,
+            // 'chat' => $chat,
             'produk' => Produk::where('id_konter', $konter->id)->paginate(10),
         ];
         return view('pages.toko_detail', $data);
