@@ -20,15 +20,17 @@
                                 <div class="col-md-3 col-sm-12">
                                     <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                                         aria-orientation="vertical">
-                                        @foreach ($chat as $item)
+                                        @foreach ($room_user as $item)
                                             <li>
-                                                <a class="nav-link text-left " id="v-pills-{{ $item->id }}-tab"
-                                                    data-toggle="pill" href="#v-pills-{{ $item->id }}" role="tab"
-                                                    aria-controls="v-pills-{{ $item->id }}" aria-selected="false">
-                                                    <img src="{{ $item->user_from->avatar == '' ? asset('img/user.png') : url(Storage::url($item->user_from->avatar)) }}"
+                                                <a class="nav-link text-left " id="v-pills-{{ $item->chat_room_id }}-tab"
+                                                    data-toggle="pill" href="#v-pills-{{ $item->chat_room_id }}"
+                                                    role="tab" aria-controls="v-pills-{{ $item->id }}"
+                                                    aria-selected="false">
+                                                    <img src="{{ $item->user->avatar == '' ? asset('img/user.png') : url(Storage::url($item->user_from->avatar)) }}"
                                                         alt="user-image" class="img-fluid avtar avtar-l"
                                                         style="height:20px; width:auto;">
-                                                    {{ $item->user_from->name }}
+                                                    {{ Str::limit($item->user->name, 10) }}<br><small
+                                                        style="margin-left: 20px;">{{ App\Models\Chat::where('chat_room_id', $item->chat_room_id)->latest()->first()->created_at->diffForhumans() }}</small>
                                                 </a>
                                             </li>
                                         @endforeach
@@ -37,7 +39,7 @@
                                 </div>
                                 <div class="col-md-9 col-sm-12">
                                     <div class="tab-content" id="v-pills-tabContent">
-                                        @include('konter.chat.isi_chat')
+                                        @include('konter.chat.chat')
                                     </div>
                                 </div>
                             </div>

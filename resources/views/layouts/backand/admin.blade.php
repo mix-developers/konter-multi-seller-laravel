@@ -188,7 +188,7 @@
 
     <!-- Modal -->
 
-    <div class="modal notification-modal fade " id="notification-modal" tabindex="-1" role="dialog"
+    {{-- <div class="modal notification-modal fade " id="notification-modal" tabindex="-1" role="dialog"
         aria-modal="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -227,7 +227,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- [ Header ] end -->
 

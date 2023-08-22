@@ -162,26 +162,7 @@
                         </div>
                         <div class="mt-4">
                             <hr>
-                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="pills-rating-tab" data-toggle="pill" href="#pills-rating"
-                                        role="tab" aria-controls="pills-rating" aria-selected="true">Rating dan
-                                        Ulasan</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-chat-tab" data-toggle="pill" href="#pills-chat"
-                                        role="tab" aria-controls="pills-chat" aria-selected="false">Chat Konter</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-rating" role="tabpanel"
-                                    aria-labelledby="pills-rating-tab">
-                                    @include('pages.tab-toko.toko-rating')
-                                </div>
-                                <div class="tab-pane fade" id="pills-chat" role="tabpanel" aria-labelledby="pills-chat-tab">
-                                    @include('pages.tab-toko.toko-chat')
-                                </div>
-                            </div>
+                            @include('pages.components.toko-rating')
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -207,6 +188,12 @@
                                             class="btn btn-success btn-sm text-white"><i class="fab fa-whatsapp"></i>
                                             Hubungi WA</a>
                                     </li>
+                                    <li>
+                                        <a class="btn btn-primary btn-sm text-white"
+                                            href="{{ route('chat', $konter->id_pemilik) }}">
+                                            <i class="fa fa-message"></i> Chat Toko</a>
+                                    </li>
+
                                 </ul>
                             </div>
                             <div class="categorise-menu">

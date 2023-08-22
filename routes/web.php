@@ -35,15 +35,21 @@ Route::get('/konter_list', [FrontController::class, 'konter_list']);
 Route::get('/konter_detail/{slug}', [FrontController::class, 'konter_detail']);
 Route::get('/produk_list', [FrontController::class, 'produk_list']);
 Route::get('/service', [FrontController::class, 'service']);
-Route::get('/chat', [PusherController::class, 'index']);
-
-// Real-time Chat Routes
-Route::post('/broadcast', [PusherController::class, 'broadcast']);
-Route::post('/receive', [PusherController::class, 'receive']);
 
 Route::get('/status/{code}', [MemberController::class, 'status'])->name('status');
 
+
+
 Auth::routes(['verify' => true]);
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/chat/user/{user}', [App\Http\Controllers\ChatController::class, 'chat'])->name('chat');
+    Route::get('/chat/room/{room}', [App\Http\Controllers\ChatController::class, 'room'])->name('chat.room');
+    Route::get('/chat/get/{room}', [App\Http\Controllers\ChatController::class, 'getChat'])->name('chat.get');
+    Route::post('/chat/send', [App\Http\Controllers\ChatController::class, 'sendChat'])->name('chat.send');
+});
+
 // Admin Routes
 Route::prefix('admin')->middleware(['admin', 'verified'])->name('admin.')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -107,7 +113,7 @@ Route::prefix('konter')->middleware(['konter', 'verified'])->name('konter.')->gr
     Route::get('user/akun', [UserController::class, 'akunKonter'])->name('konter.user.akun');
     Route::put('user/update/{id}', [UserController::class, 'update'])->name('konter.user.update');
     Route::get('ulasan', [KonterController::class, 'ulasan'])->name('ulasan');
-    Route::get('chat', [ChatController::class, 'index'])->name('chat');
+    Route::get('chat', [ChatController::class, 'konter'])->name('chat');
     Route::post('laporan/exportService', [LaporanController::class, 'exportService'])->name('laporan.exportService');
     Route::get('laporan/exportProduk', [LaporanController::class, 'exportProduk'])->name('laporan.exportProduk');
 });
