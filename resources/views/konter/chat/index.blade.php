@@ -26,10 +26,10 @@
                                                     data-toggle="pill" href="#v-pills-{{ $item->chat_room_id }}"
                                                     role="tab" aria-controls="v-pills-{{ $item->id }}"
                                                     aria-selected="false">
-                                                    <img src="{{ $item->user->avatar == '' ? asset('img/user.png') : url(Storage::url($item->user_from->avatar)) }}"
+                                                    <img src="{{ $item->user->avatar == '' ? asset('img/user.png') : url(Storage::url($item->user->avatar)) }}"
                                                         alt="user-image" class="img-fluid avtar avtar-l"
                                                         style="height:20px; width:auto;">
-                                                    {{ Str::limit($item->user->name, 10) }}<br><small
+                                                    {{ Str::limit(App\Models\ChatRoomUser::where('chat_room_id', $item->chat_room_id)->where('user_id', '!=', Auth::user()->id)->first()->user->name,15) }}<br><small
                                                         style="margin-left: 20px;">{{ App\Models\Chat::where('chat_room_id', $item->chat_room_id)->latest()->first()->created_at->diffForhumans() }}</small>
                                                 </a>
                                             </li>
