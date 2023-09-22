@@ -8,7 +8,8 @@
 
 <script src="{{ asset('admin_theme') }}/assets/js/plugins/jquery.dataTables.min.js"></script>
 <script src="{{ asset('admin_theme') }}/assets/js/plugins/dataTables.bootstrap4.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{ asset('admin_theme') }}/assets/js/plugins/sweet-alert/sweetalert2.all.js"></script>
+{{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
 
 <!-- notification Js -->
 <script src="{{ asset('admin_theme') }}/assets/js/plugins/bootstrap-notify.min.js"></script>
