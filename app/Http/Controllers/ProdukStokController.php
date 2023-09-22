@@ -38,16 +38,16 @@ class ProdukStokController extends Controller
         $cek_stok = ProdukStok::getTotalStokProduk($request->id_produk);
         // dd($cek_stok);
 
-        if ($request->type == 0 && $cek_stok >= $request->stok) {
+        if ($request->type == 0 && $request->stok >= $cek_stok) {
 
+            return redirect()->back()->with('danger', 'Stok kurang');
+        } else {
             if ($stok->save()) {
 
                 return redirect()->back()->with('success', 'Berhasil menambahkan data');
             } else {
                 return redirect()->back()->with('danger', 'Gagal menambahkan data');
             }
-        } else {
-            return redirect()->back()->with('danger', 'Stok kurang');
         }
     }
     public function update(Request $request, $id)

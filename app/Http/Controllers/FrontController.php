@@ -50,7 +50,7 @@ class FrontController extends Controller
             'layanan' => $layanan,
             'rating' => $rating,
             // 'chat' => $chat,
-            'produk' => Produk::where('id_konter', $konter->id)->paginate(10),
+            'produk' => Produk::where('id_konter', $konter->id)->paginate(2),
         ];
         return view('pages.toko_detail', $data);
     }

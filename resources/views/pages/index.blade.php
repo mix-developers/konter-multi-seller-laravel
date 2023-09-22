@@ -21,7 +21,29 @@
             </form>
         </div>
     </div>
-
+    <!-- Team section for Konter -->
+    <section class="team-section section">
+        <div class="container text-center">
+            <div class="section-title">
+                <h3>Daftar Konter</h3>
+            </div>
+            <div class="row justify-content-center">
+                @foreach ($konter as $item)
+                    @component('pages.components.konter-card', [
+                        'thumbnail' => $item->thumbnail,
+                        'name' => $item->name,
+                        'rating' => App\Models\ReviewRating::getKonterRating($item->id),
+                        'reviewCount' => App\Models\ReviewRating::getKonterCount($item->id),
+                        'modalTarget' => '#toko-' . $item->slug,
+                        'url_detail' => url('/konter_detail', $item->slug),
+                    ])
+                    @endcomponent
+                @endforeach
+            </div>
+            <a href="{{ url('/konter_list') }}" class="btn btn-style-one mt-4">Lihat Semua Konter</a>
+        </div>
+    </section>
+    <!-- End team section for Konter -->
     <!-- Team section for Products -->
     <section class="team-section section">
         <div class="container text-center">
@@ -49,28 +71,7 @@
     </section>
     <!-- End team section for Products -->
 
-    <!-- Team section for Konter -->
-    <section class="team-section section">
-        <div class="container text-center">
-            <div class="section-title">
-                <h3>Daftar Konter</h3>
-            </div>
-            <div class="row justify-content-center">
-                @foreach ($konter as $item)
-                    @component('pages.components.konter-card', [
-                        'thumbnail' => $item->thumbnail,
-                        'name' => $item->name,
-                        'rating' => App\Models\ReviewRating::getKonterRating($item->id),
-                        'reviewCount' => App\Models\ReviewRating::getKonterCount($item->id),
-                        'modalTarget' => '#toko-' . $item->slug,
-                    ])
-                    @endcomponent
-                @endforeach
-            </div>
-            <a href="{{ url('/konter_list') }}" class="btn btn-style-one mt-4">Lihat Semua Konter</a>
-        </div>
-    </section>
-    <!-- End team section for Konter -->
+
 
     @foreach ($produk as $item)
         @php

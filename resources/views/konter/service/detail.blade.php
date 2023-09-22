@@ -191,7 +191,8 @@
                                                     {{ $item->status->status }}
                                                 </td>
                                                 <td>
-                                                    {{ $item->date }}
+                                                    {{ $item->created_at->format('d F Y') }}<br>
+                                                    Pada jam : {{ $item->created_at->format('H:i:s') }} WIT
                                                 </td>
                                                 <td width="50">
                                                     @if ($service->deleted_at == null)

@@ -21,9 +21,10 @@
             </div>
             <small>{{ $reviewCount }} Ulasan</small>
             <div class="mt-3">
-                <button type="button" class="btn btn-main" data-toggle="modal" data-target="{{ $modalTarget }}">
+                {{-- <button type="button" class="btn btn-main" data-toggle="modal" data-target="{{ $modalTarget }}">
                     Detail Konter
-                </button>
+                </button> --}}
+                <a href="{{ $url_detail }}" class="btn btn-main">Detail Konter</a>
             </div>
         </div>
     </div>

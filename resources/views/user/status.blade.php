@@ -311,7 +311,11 @@
                                                             width="100">
                                                     @endif
                                                 </td>
-                                                <td>{{ $item->date }}</td>
+                                                {{-- <td>{{ $item->date }}</td> --}}
+                                                <td>
+                                                    {{ $item->created_at->format('d F Y') }}<br>
+                                                    Pada jam : {{ $item->created_at->format('H:i:s') }} WIT
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </thead>

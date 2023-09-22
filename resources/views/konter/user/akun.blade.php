@@ -49,7 +49,6 @@
                                             class="p-l-5">Profil Akun</span></h5>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="mb-3">Perbarui Data</h5>
                                     @if (Session::has('success'))
                                         <div class="alert alert-success" role="alert">
                                             {{ Session::get('success') }}
@@ -62,7 +61,8 @@
                                             </div>
                                         @endforeach
                                     @endif
-                                    <form method="POST" action="{{ url('dashboard.user.update', $user->id) }}"
+                                    <h5 class="mb-3">Perbarui Data</h5>
+                                    <form method="POST" action="{{ url('konter/user/update', $user->id) }}"
                                         enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')

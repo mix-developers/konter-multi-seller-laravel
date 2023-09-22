@@ -160,6 +160,9 @@
 
 
                         </div>
+                        <div class="my-3 text-center justify-content-center">
+                            {{ $produk->links('vendor.pagination.bootstrap-5') }}
+                        </div>
                         <div class="mt-4">
                             <hr>
                             @include('pages.components.toko-rating')
