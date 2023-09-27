@@ -132,13 +132,17 @@
             </div>
             <div class="ml-auto">
                 <ul class="list-unstyled">
-                    <li class="pc-h-item">
-                        <a class="pc-head-link mr-0" href="#" data-toggle="modal"
-                            data-target="#notification-modal">
-                            <i data-feather="message-circle" class="text-primary"></i>
-                            <span class="badge badge-danger pc-h-badge dots"><span class="sr-only"></span></span>
-                        </a>
-                    </li>
+                    @if (Auth::user()->role != 'admin')
+                        <li class="pc-h-item">
+                            <a class="pc-head-link mr-0" href="{{ route('konter.chat') }}" d>
+                                <i data-feather="message-circle" class="text-primary"></i>
+                                @if (App\Models\Chat::getNotif(Auth::user()->id)->is_read == 0)
+                                    <span class="badge badge-danger pc-h-badge dots"><span
+                                            class="sr-only"></span></span>
+                                @endif
+                            </a>
+                        </li>
+                    @endif
                     <li class="dropdown pc-h-item">
                         <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">

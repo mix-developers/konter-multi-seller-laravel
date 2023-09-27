@@ -100,7 +100,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label>Nomor Handphone</label>
-                                                <input type="number" class="form-control" name="phone"
+                                                <input type="text " class="form-control" name="phone"
                                                     placeholder="Nomor Handphone" value="{{ $user->phone }}" required>
                                             </div>
                                         </div>

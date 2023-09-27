@@ -14,6 +14,7 @@
                         'rating' => App\Models\ReviewRating::getKonterRating($item->id),
                         'reviewCount' => App\Models\ReviewRating::getKonterCount($item->id),
                         'modalTarget' => '#toko-' . $item->slug,
+                        'url_detail' => url('/konter_detail', $item->slug),
                     ])
                     @endcomponent
                 @endforeach

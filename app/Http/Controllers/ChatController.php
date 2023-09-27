@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Events\ChatEvent; // Pastikan Anda memiliki model Event yang sesuai
+
+use App\Models\Chat;
 use App\Models\ChatRoomUser;
 use App\Models\Konter;
 use App\Models\User;
@@ -131,5 +133,14 @@ class ChatController extends Controller
         ]);
 
         return redirect()->route('chat.room', ['room' => $uuid]);
+    }
+    public function readAll($id)
+    {
+        $chat = Chat::where('user_id', $id)->get();
+        foreach ($chat as $item) {
+            $item->is_read = 1;
+            $item->save();
+        }
+        return redirect()->back();
     }
 }
