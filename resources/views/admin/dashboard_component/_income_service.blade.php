@@ -1,14 +1,14 @@
 <div class="col-12">
     <div class="card bg-primary  text-center">
         <div class="card-body">
-            <h4 class="text-white">Dashboard pendapatan service oleh konter</h4>
+            <h4 class="text-white">Dashboard pendapatan service oleh counter</h4>
         </div>
     </div>
 </div>
 <div class="col-md-4">
     <div class="card">
         <div class="card-body">
-            <h6>persentase Pendapatan Semua Konter ({{ date('F') }})</h6>
+            <h6>persentase Pendapatan Semua counter ({{ date('F') }})</h6>
             <div class="row d-flex align-items-center">
                 <div class="col-9">
                     <h3 class="f-w-300 d-flex align-items-center ">
@@ -38,7 +38,7 @@
 <div class="col-md-4">
     <div class="card">
         <div class="card-body">
-            <h6>Pendapatan Semua Konter bulan lalu</h6>
+            <h6>Pendapatan Semua Counter bulan lalu</h6>
             <div class="row d-flex align-items-center">
 
                 <div class="col-9">
@@ -59,7 +59,7 @@
 <div class="col-md-4">
     <div class="card">
         <div class="card-body">
-            <h6>Pendapatan Semua Konter bulan ini</h6>
+            <h6>Pendapatan Semua Counter bulan ini</h6>
             <div class="row d-flex align-items-center">
 
                 <div class="col-9">

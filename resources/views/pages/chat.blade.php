@@ -92,7 +92,7 @@
                 <div class="d-flex align-items-center 
                 ${r.user_id == "{{ Auth::user()->id }}" ? 'text-right justify-content-end' : ''}">
                     <div class="pr-2 ${r.user_id == "{{ Auth::user()->id }}" ? '' : 'pl-1'}"> 
-                        <span class="name">${r.user_id == "{{ Auth::user()->id }}" ?  'Anda' :'Konter' } | ${timeString}</span>
+                        <span class="name">${r.user_id == "{{ Auth::user()->id }}" ?  'Anda' :'Counter' } | ${timeString}</span>
                         <p class="msg">${r.message}</p>
                     </div>
                 </div>`

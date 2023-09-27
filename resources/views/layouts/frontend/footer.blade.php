@@ -11,7 +11,7 @@
                     <a href="{{ url('/') }}">Beranda</a>
                 </li>
                 <li>
-                    <a href="{{ url('/konter_list') }}">Konter</a>
+                    <a href="{{ url('/konter_list') }}">Counter</a>
                 </li>
                 <li>
                     <a href="{{ url('/produk_list') }}">Produk</a>

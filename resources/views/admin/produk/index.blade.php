@@ -24,7 +24,7 @@
                                             <th>#</th>
                                             <th>Thumbnail</th>
                                             <th>Nama Produk</th>
-                                            <th>Konter</th>
+                                            <th>Counter</th>
                                         </tr>
                                     </thead>
                                     <tbody>

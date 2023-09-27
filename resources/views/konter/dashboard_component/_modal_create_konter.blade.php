@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title h4" id="myLargeModalLabel">Tambah Konter</h5>
+                <h5 class="modal-title h4" id="myLargeModalLabel">Tambah Counter</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -12,16 +12,16 @@
                     @csrf
                     <input type="hidden" name="id_pemilik" value="{{ Auth::id() }}">
                     <div class="form-group">
-                        <label for="name">Foto Konter</label>
+                        <label for="name">Foto Counter</label>
                         <input type="file" class="form-control @error('thumbanil') is-invalid @enderror"
                             name="thumbnail">
                     </div>
                     <div class="form-group">
-                        <label for="name">Nama Konter</label>
+                        <label for="name">Nama Counter</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
                     </div>
                     <div class="form-group">
-                        <label for="address">Alamat Konter</label>
+                        <label for="address">Alamat Counter</label>
                         <input type="text" class="form-control @error('address') is-invalid @enderror"
                             name="address">
                     </div>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="form-group ">
-                        <label>Deskripsi Konter</label>
+                        <label>Deskripsi Counter</label>
                         <textarea class="ckeditor" name="description" id="description" cols="30" rows="4"></textarea>
                     </div>
                     <button type="submit" class="btn  btn-primary">Simpan</button>

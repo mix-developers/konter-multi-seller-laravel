@@ -32,7 +32,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Thumbnail</th>
-                                            <th>Nama Konter</th>
+                                            <th>Nama Counter</th>
                                             <th>Alamat</th>
                                             <th>Aksi</th>
                                         </tr>

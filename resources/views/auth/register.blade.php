@@ -81,7 +81,7 @@
                                     </div>
                                     <select class="custom-select" id="role" name="role">
                                         <option value="user">Pelanggan</option>
-                                        <option value="konter">Konter</option>
+                                        <option value="konter">Counter</option>
                                     </select>
                                     @error('role')
                                         <span class="invalid-feedback" role="alert">

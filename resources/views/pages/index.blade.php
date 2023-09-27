@@ -25,7 +25,7 @@
     <section class="team-section section">
         <div class="container text-center">
             <div class="section-title">
-                <h3>Daftar Konter</h3>
+                <h3>Daftar Counter</h3>
             </div>
             <div class="row justify-content-center">
                 @foreach ($konter as $item)
@@ -40,7 +40,7 @@
                     @endcomponent
                 @endforeach
             </div>
-            <a href="{{ url('/konter_list') }}" class="btn btn-style-one mt-4">Lihat Semua Konter</a>
+            <a href="{{ url('/konter_list') }}" class="btn btn-style-one mt-4">Lihat Semua Counter</a>
         </div>
     </section>
     <!-- End team section for Konter -->

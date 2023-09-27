@@ -21,7 +21,7 @@
 <div class="col-md-4">
     <div class="card">
         <div class="card-body">
-            <h6>Akun Konter</h6>
+            <h6>Akun Counter</h6>
             <div class="row d-flex align-items-center">
                 <div class="col-9">
                     <h3 class="f-w-300 d-flex align-items-center text-danger">

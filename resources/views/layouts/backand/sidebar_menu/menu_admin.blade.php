@@ -17,10 +17,10 @@
         </li>
         <li class="pc-item pc-hasmenu">
             <a href="javascript:void(0)" class="pc-link"><span class="pc-micon"><i data-feather="home"></i></span><span
-                    class="pc-mtext">Modul Konter</span><span class="pc-arrow"><i
+                    class="pc-mtext">Modul Counter</span><span class="pc-arrow"><i
                         data-feather="chevron-right"></i></span></a>
             <ul class="pc-submenu">
-                <li class="pc-item"><a href="{{ url('/admin/konter') }}" class="pc-link ">Konter</a></li>
+                <li class="pc-item"><a href="{{ url('/admin/konter') }}" class="pc-link ">Counter</a></li>
                 <li class="pc-item"><a href="{{ url('/admin/layanan') }}" class="pc-link ">Layanan</a></li>
                 <li class="pc-item"><a href="{{ url('/admin/produk') }}" class="pc-link ">Produk</a></li>
             </ul>
@@ -31,7 +31,7 @@
                         data-feather="chevron-right"></i></span></a>
             <ul class="pc-submenu">
                 <li class="pc-item"><a href="{{ url('admin/akun/admin') }}" class="pc-link ">Akun Admin</a></li>
-                <li class="pc-item"><a href="{{ url('admin/akun/konter') }}" class="pc-link ">Akun Konter</a></li>
+                <li class="pc-item"><a href="{{ url('admin/akun/konter') }}" class="pc-link ">Akun Counter</a></li>
                 <li class="pc-item"><a href="{{ url('admin/akun/user') }}" class="pc-link ">Akun User</a></li>
             </ul>
         </li>
@@ -53,10 +53,10 @@
                 <label>Master Data</label>
             </li>
             <li class="pc-item"><a href="{{ url('/konter/layanan') }}" class="pc-link "><span class="pc-micon"><i
-                            data-feather="life-buoy"></i></span><span class="pc-mtext">Layanan Konter</span></a>
+                            data-feather="life-buoy"></i></span><span class="pc-mtext">Layanan Counter</span></a>
             </li>
             <li class="pc-item"><a href="{{ url('/konter/produk') }}" class="pc-link "><span class="pc-micon"><i
-                            data-feather="life-buoy"></i></span><span class="pc-mtext">Produk Konter</span></a>
+                            data-feather="life-buoy"></i></span><span class="pc-mtext">Produk Counter</span></a>
             </li>
             <li class="pc-item"><a href="{{ url('/konter/stok') }}" class="pc-link "><span class="pc-micon"><i
                             data-feather="life-buoy"></i></span><span class="pc-mtext">Stok Produk</span></a>

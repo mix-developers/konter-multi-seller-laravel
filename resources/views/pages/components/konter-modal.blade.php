@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body ">
-                <p class="p-2 border border-secondary shadow-sm rounded"><strong class="text-info">Nama Konter :
+                <p class="p-2 border border-secondary shadow-sm rounded"><strong class="text-info">Nama Counter :
                     </strong>
                     {{ $item->name }}
                 </p>
@@ -23,7 +23,7 @@
                         :
                     </strong>
                     {!! $item->description !!}</div>
-                <a href="{{ url('/konter_detail', $item->slug) }}" class="btn btn-info">Kunjungi Konter</a>
+                <a href="{{ url('/konter_detail', $item->slug) }}" class="btn btn-info">Kunjungi Counter</a>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

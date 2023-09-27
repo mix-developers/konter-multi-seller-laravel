@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            Update Konter
+                            Update Counter
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ url('/konter/konter/update', $konter->id) }}"
@@ -34,22 +34,22 @@
                                         alt="{{ $konter->name }}" class="img-fluid img-avatar" width="300">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Foto Konter</label>
+                                    <label for="name">Foto Counter</label>
                                     <input type="file" class="form-control @error('thumbanil') is-invalid @enderror"
                                         name="thumbnail">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Nama Konter</label>
+                                    <label for="name">Nama Counter</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
                                         name="name" value="{{ $konter->name }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Alamat Konter</label>
+                                    <label for="address">Alamat Counter</label>
                                     <input type="text" class="form-control @error('address') is-invalid @enderror"
                                         name="address" value="{{ $konter->address }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="id_pemilik">Pemilik Konter</label>
+                                    <label for="id_pemilik">Pemilik Counter</label>
                                     <select name="id_pemilik" id="id_pemilik" class="form-control" disabled>
                                         <option value="">--Pilih Pemilik --</option>
                                         @foreach ($pemilik as $list)
@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label>Deskripsi Konter</label>
+                                    <label>Deskripsi Counter</label>
                                     <textarea class="ckeditor" name="description" id="description" cols="30" rows="4">{!! $konter->description !!}</textarea>
                                 </div>
                                 <button type="submit" class="btn  btn-primary">Simpan</button>

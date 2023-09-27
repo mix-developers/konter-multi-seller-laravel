@@ -16,12 +16,12 @@
                 <p class="p-2 border border-secondary shadow-sm rounded"><strong class="text-info">Stok Produk
                         :</strong>
                     {{ $total_stok }}</p>
-                <p class="p-2 border border-secondary shadow-sm rounded"><strong class="text-info">Konter :</strong>
+                <p class="p-2 border border-secondary shadow-sm rounded"><strong class="text-info">Counter :</strong>
                     {{ $product->konter->name }}</p>
                 <div class="p-2 border border-secondary shadow-sm rounded mb-3"><strong class="text-info">Deskripsi
                         :</strong>
                     {!! $product->description !!}</div>
-                <a href="{{ url('/konter_detail', $product->konter->slug) }}" class="btn btn-info">Kunjungi Konter</a>
+                <a href="{{ url('/konter_detail', $product->konter->slug) }}" class="btn btn-info">Kunjungi Counter</a>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

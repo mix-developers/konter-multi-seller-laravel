@@ -75,7 +75,7 @@
                     <a class="nav-link" href="{{ url('/') }}">Beranda</a>
                 </li>
                 <li class="nav-item " id="konter">
-                    <a class="nav-link" href="{{ url('/konter_list') }}">Konter</a>
+                    <a class="nav-link" href="{{ url('/konter_list') }}">Counter</a>
                 </li>
                 <li class="nav-item " id="produk">
                     <a class="nav-link" href="{{ url('/produk_list') }}">Produk</a>

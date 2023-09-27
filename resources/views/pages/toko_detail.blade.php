@@ -143,7 +143,7 @@
                                                 <h4 class="text-danger">Rp {{ number_format($item->price) }}</h4>
 
                                                 <h5 style="color:black;" class="pb-3">{{ $item->name }}</h5>
-                                                <span>Konter : {{ $item->konter->name }}</span><br>
+                                                <span>Counter : {{ $item->konter->name }}</span><br>
                                                 <button type="button" class="btn btn-main" data-toggle="modal"
                                                     data-target="#produk-{{ $item->slug }}">
                                                     Detail Produk
@@ -154,7 +154,7 @@
                                 </div>
                             @empty
                                 <div class="text-center" style="height: 300px;">
-                                    <p class="text-muted">Belum ada produk pada konter ini</p>
+                                    <p class="text-muted">Belum ada produk pada counter ini</p>
                                 </div>
                             @endforelse
 
@@ -173,16 +173,16 @@
 
                             <div class="categorise-menu">
                                 <div class="text-title">
-                                    <h6 class="text-info">Informasi Konter</h6>
+                                    <h6 class="text-info">Informasi Counter</h6>
                                 </div>
                                 <ul class="categorise-list">
-                                    <li><a href="#"><strong>Nama Konter : </strong>{{ $konter->name }} </a></li>
-                                    <li><a href="#"><strong>Pemilik Konter : </strong>{{ $konter->pemilik->name }}
+                                    <li><a href="#"><strong>Nama Counter : </strong>{{ $konter->name }} </a></li>
+                                    <li><a href="#"><strong>Pemilik Counter : </strong>{{ $konter->pemilik->name }}
                                         </a>
-                                    <li><a href="#"><strong>Nomor Konter : </strong>{{ $konter->pemilik->phone }}
+                                    <li><a href="#"><strong>Nomor Counter : </strong>{{ $konter->pemilik->phone }}
                                         </a>
                                     </li>
-                                    <li><a href="#"><strong>Alamat Konter : </strong>{{ $konter->address }} </a>
+                                    <li><a href="#"><strong>Alamat Counter : </strong>{{ $konter->address }} </a>
                                     </li>
                                     <li><a href="#"><strong>Jam Buka : </strong>{{ $konter->time_open }} -
                                             {{ $konter->time_close }} WIT</a>
