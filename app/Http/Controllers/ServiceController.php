@@ -26,7 +26,7 @@ class ServiceController extends Controller
         $konter = Konter::where('id_pemilik', Auth::user()->id)->first();
         $data = [
             'title' => 'Daftar Service',
-            'service' => Service::getAll(),
+            'service' => Service::where('id_konter', $konter->id)->get(),
             'konter' => $konter,
             'pelanggan' => User::where('role', 'user')->get(),
             'layanan_list' => LayananKonter::getLayananKonter($konter->id),
@@ -35,22 +35,25 @@ class ServiceController extends Controller
     }
     public function detail($id)
     {
-
-        $konter = Konter::where('id_pemilik', Auth::user()->id)->first();
-        $service = Service::where('id', $id)->withTrashed()->first();
-        $service_price = ServicePrice::where('id_service', $id)->get();
-        $user = User::find($service->id_user);
-        $data = [
-            'title' => 'Detail Service',
-            'service' => $service,
-            'status' => Status::all(),
-            'user' => $user,
-            'konter' => $konter,
-            'service_price' => $service_price,
-            'total_price' => ServicePrice::getTotalService($id),
-            'status_service' => ServiceStatus::where('id_service', $service->id)->get(),
-        ];
-        return view('konter.service.detail', $data);
+        try {
+            $konter = Konter::where('id_pemilik', Auth::user()->id)->first();
+            $service = Service::where('id', $id)->withTrashed()->first();
+            $service_price = ServicePrice::where('id_service', $id)->get();
+            $user = User::find($service->id_user);
+            $data = [
+                'title' => 'Detail Service',
+                'service' => $service,
+                'status' => Status::all(),
+                'user' => $user,
+                'konter' => $konter,
+                'service_price' => $service_price,
+                'total_price' => ServicePrice::getTotalService($id),
+                'status_service' => ServiceStatus::where('id_service', $service->id)->get(),
+            ];
+            return view('konter.service.detail', $data);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('danger', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
     public function store(Request $request)
     {

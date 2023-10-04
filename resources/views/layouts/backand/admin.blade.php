@@ -136,9 +136,11 @@
                         <li class="pc-h-item">
                             <a class="pc-head-link mr-0" href="{{ route('konter.chat') }}" d>
                                 <i data-feather="message-circle" class="text-primary"></i>
-                                @if (App\Models\Chat::getNotif(Auth::user()->id)->is_read == 0)
-                                    <span class="badge badge-danger pc-h-badge dots"><span
-                                            class="sr-only"></span></span>
+                                @if (App\Models\Chat::getNotif(Auth::user()->id) != null)
+                                    @if (App\Models\Chat::getNotif(Auth::user()->id)->is_read == 0)
+                                        <span class="badge badge-danger pc-h-badge dots"><span
+                                                class="sr-only"></span></span>
+                                    @endif
                                 @endif
                             </a>
                         </li>

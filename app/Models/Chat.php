@@ -13,6 +13,7 @@ class Chat extends Model
 
     public static function getNotif($user_id)
     {
-        return self::where('user_id', $user_id)->latest()->first();
+        $room = self::where('user_id', $user_id)->latest()->first();
+        return self::where('user_id', '!=', $user_id)->where('chat_room_id', $room->chat_room_id)->latest()->first();
     }
 }

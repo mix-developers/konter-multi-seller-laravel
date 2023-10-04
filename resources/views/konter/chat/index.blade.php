@@ -18,17 +18,19 @@
                             <h5 class="mb-3">{{ $title }}</h5>
                             <div class="row">
                                 <div class="col-md-3 col-sm-12">
-                                    @if (App\Models\Chat::getNotif(Auth::user()->id)->is_read == 0)
-                                        <div class="my-3">
-                                            <form action="{{ route('chat.readAll', Auth::user()->id) }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-primary btn-sm"><i
-                                                        class="fa fa-check"></i> Tandai telah dibaca
-                                                </button>
-                                            </form>
-                                        </div>
-                                        <hr>
+                                    @if (App\Models\Chat::getNotif(Auth::user()->id) != null)
+                                        @if (App\Models\Chat::getNotif(Auth::user()->id)->is_read == 0)
+                                            <div class="my-3">
+                                                <form action="{{ route('chat.readAll', Auth::user()->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="btn btn-primary btn-sm"><i
+                                                            class="fa fa-check"></i> Tandai telah dibaca
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <hr>
+                                        @endif
                                     @endif
                                     <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                                         aria-orientation="vertical">

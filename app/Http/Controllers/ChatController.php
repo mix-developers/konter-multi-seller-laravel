@@ -136,10 +136,14 @@ class ChatController extends Controller
     }
     public function readAll($id)
     {
-        $chat = Chat::where('user_id', $id)->get();
-        foreach ($chat as $item) {
-            $item->is_read = 1;
-            $item->save();
+
+        $room = Chat::where('user_id', $id)->get();
+        foreach ($room as $r) {
+            $chat = Chat::where('chat_room_id', $r->chat_room_id)->get();
+            foreach ($chat as $item) {
+                $item->is_read = 1;
+                $item->save();
+            }
         }
         return redirect()->back();
     }

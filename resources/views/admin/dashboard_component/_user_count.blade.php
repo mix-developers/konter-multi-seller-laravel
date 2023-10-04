@@ -29,7 +29,6 @@
                             class="mr-3"></i>{{ App\Models\User::where('role', 'konter')->count() }}
                     </h3>
                 </div>
-
             </div>
             <div class="progress m-t-30" style="height: 7px;">
                 <div class="progress-bar bg-theme" role="progressbar" style="width: 100%;" aria-valuenow="100"
