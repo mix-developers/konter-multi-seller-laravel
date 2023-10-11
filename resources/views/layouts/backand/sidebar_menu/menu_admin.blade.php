@@ -9,9 +9,9 @@
         <li class="pc-item pc-caption">
             <label>Master Data</label>
         </li>
-        <li class="pc-item"><a href="{{ url('/admin/kategori') }}" class="pc-link "><span class="pc-micon"><i
+        {{-- <li class="pc-item"><a href="{{ url('/admin/kategori') }}" class="pc-link "><span class="pc-micon"><i
                         data-feather="life-buoy"></i></span><span class="pc-mtext">Kategori Produk</span></a>
-        </li>
+        </li> --}}
         <li class="pc-item"><a href="{{ url('/admin/status') }}" class="pc-link "><span class="pc-micon"><i
                         data-feather="life-buoy"></i></span><span class="pc-mtext">Status Service</span></a>
         </li>
