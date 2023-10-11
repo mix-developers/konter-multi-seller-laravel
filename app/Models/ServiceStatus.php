@@ -25,4 +25,13 @@ class ServiceStatus extends Model
     {
         return self::with('status')->where('id_service', $id_service)->latest()->first();
     }
+    public static function checkFinish($id_service)
+    {
+        return self::with('status')
+            ->where('id_service', $id_service)
+            ->whereHas('status', function ($query) {
+                $query->where('id_status', 4);
+            })
+            ->first();
+    }
 }

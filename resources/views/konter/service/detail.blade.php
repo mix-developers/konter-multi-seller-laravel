@@ -79,13 +79,28 @@
                                             <i class="fab fa-whatsapp"></i> Hubungi Pelanggan
                                         </a>
                                         @if ($service->deleted_at == null)
-                                            <form method="POST"
+                                            {{-- <form method="POST"
                                                 action="{{ url('/konter/service/destroy', $service->id) }}"
                                                 class="d-inline-block">
                                                 @csrf
                                                 @method('DELETE')
+                                                <input type="hidden" name="id_service" value="{{$service->id}}">
                                                 <button type="submit" class="btn btn-light-danger btn-md delete-button">
                                                     <i class="fas fa-times-circle"></i> Batalkan Service
+                                                </button>
+                                            </form> --}}
+                                            <button type="button" class="btn btn-light-danger btn-md " data-toggle="modal"
+                                                data-target=".batalkan-service">
+                                                <i class="fas fa-times-circle"></i> Batalkan Service
+                                            </button>
+                                        @else
+                                            <form method="POST"
+                                                action="{{ url('/konter/service/restore_service', $service->id) }}"
+                                                class="d-inline-block">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-light-primary btn-md ">
+                                                    <i class="fas  fa-rotate-right"></i> Lanjutkan Service
                                                 </button>
                                             </form>
                                         @endif

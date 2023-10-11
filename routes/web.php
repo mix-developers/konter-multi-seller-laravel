@@ -108,6 +108,8 @@ Route::prefix('konter')->middleware(['konter', 'verified'])->name('konter.')->gr
     Route::post('service/storeStatus', [ServiceController::class, 'storeStatus'])->name('service.storeStatus');
     Route::post('service/storePrice', [ServiceController::class, 'storePrice'])->name('service.storePrice');
     Route::put('service/update/{id}', [ServiceController::class, 'update'])->name('service.update');
+    Route::post('service/batalkan_service', [ServiceController::class, 'batalkan_service'])->name('service.batalkan_service');
+    Route::put('service/restore_service/{id}', [ServiceController::class, 'restore_service'])->name('service.restore_service');
     Route::delete('service/destroy/{id}', [ServiceController::class, 'destroy'])->name('service.destroy');
     Route::delete('service/destroyStatus/{id}', [ServiceController::class, 'destroyStatus'])->name('service.destroyStatus');
     Route::delete('service/destroyPrice/{id}', [ServiceController::class, 'destroyPrice'])->name('service.destroyPrice');

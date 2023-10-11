@@ -48,14 +48,23 @@
                                                     class="btn btn-info btn-sm">Cek</a></td>
                                             </td>
                                             <td class="text-center">
-                                                @if (App\Models\ServiceFinished::where('id_service', $item->id)->count() == 0)
-                                                    <form action="{{ url('/member/service/storeFinish') }}" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="id_service" value="{{ $item->id }}">
-                                                        <button type="submit" class="btn btn-success btn-sm">Klaim</button>
-                                                    </form>
-                                                @else
+                                                @if (App\Models\ServiceStatus::checkFinish($item->id) != null)
+                                                    @if (App\Models\ServiceFinished::where('id_service', $item->id)->count() == 0)
+                                                        <form action="{{ url('/member/service/storeFinish') }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="id_service"
+                                                                value="{{ $item->id }}">
+                                                            <button type="submit"
+                                                                class="btn btn-success btn-sm">Klaim</button>
+                                                        </form>
+                                                    @else
+                                                        <i class="fa fa-check text-success"></i>
+                                                    @endif
+                                                @elseif(App\Models\ServiceFinished::where('id_service', $item->id)->count() > 0)
                                                     <i class="fa fa-check text-success"></i>
+                                                @else
+                                                    <span>-</span>
                                                 @endif
                                             </td>
                                         </tr>

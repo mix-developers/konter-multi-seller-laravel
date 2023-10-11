@@ -9,22 +9,38 @@
                 </button>
             </div>
             <div class="modal-body ">
-                @foreach (App\Models\Service::getNotif() as $notif)
-                    <div class="px-2 border border-secondary shadow-sm rounded mb-2">
-                        <small class="text-muted">Service oleh : {{ $notif->konter->name }}</small><br>
-                        <span><strong class="text-info">{{ $notif->code }} : </strong>
-                            {{ App\Models\ServiceStatus::getNotifStatus($notif->id)->status->status }}</span>
-                    </div>
-                @endforeach
-                @if (App\Models\Service::getNotif() == null)
-                    <div class="text-center text-muted">
-                        Belum ada service
-                    </div>
+                @if (App\Models\Notifikasi::where('id_user', Auth::user()->id) != null)
+                    @foreach (App\Models\Notifikasi::where('id_user', Auth::user()->id)->get() as $item)
+                        <div class="border-{{ $item->type == 'success' ? 'info' : 'danger' }} border my-2"
+                            style="border-radius:10px;">
+                            <div class="p-2">
+                                <a href="#" style="font-size: 14px;"
+                                    class="text-{{ $item->type == 'success' ? 'info' : 'danger' }}">
+                                    <span>
+                                        {{ Str::limit($item->content, 100) }}
+                                    </span>
+                                </a><br>
+                                <small>{{ $item->created_at->diffForHumans() }}</small>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+                @if (App\Models\Service::getNotif()->count() > 0)
+                    <hr>
+                    <strong class="text-black">Service anda</strong>
+                    @foreach (App\Models\Service::getNotif() as $notif)
+                        <div class="px-2 border border-secondary shadow-sm rounded mb-2">
+                            <small class="text-muted">Service oleh : {{ $notif->konter->name }}</small><br>
+                            <span><strong class="text-info">{{ $notif->code }} : </strong>
+                                {{ App\Models\ServiceStatus::getNotifStatus($notif->id)->status->status }}</span>
+                        </div>
+                    @endforeach
+                    <a href="{{ url('/member/status_service') }}" class="btn btn-info">Lihat
+                        Semua Service</a>
                 @endif
             </div>
             <div class="modal-footer">
-                <a href="{{ url('/member/status_service') }}" class="btn btn-info">Lihat
-                    Semua Service</a>
+
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>

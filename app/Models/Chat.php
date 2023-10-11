@@ -10,7 +10,10 @@ class Chat extends Model
 {
     use HasFactory;
     protected $table = 'chats';
-
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     public static function getNotif($user_id)
     {
         $room = self::where('user_id', $user_id)->latest()->first();

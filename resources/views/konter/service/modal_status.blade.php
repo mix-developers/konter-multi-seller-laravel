@@ -101,6 +101,32 @@
         </div>
     </div>
 </div>
+<div class="modal fade batalkan-service" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="myLargeModalLabel">Batalkan Service</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="POST" action="{{ url('/konter/service/batalkan_service') }}"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="id_service" value="{{ $service->id }}">
+
+                    <div class="form-group ">
+                        <label>Keterangan Pembatalan <span class="text-danger">*</span></label>
+                        <textarea class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" required></textarea>
+                    </div>
+                    <button type="submit" class="btn  btn-danger">Batalkan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @push('js')
     <!-- CKEditor -->
     <script src="{{ asset('backand_theme') }}/assets/plugins/ckeditor/ckeditor.js"></script>
