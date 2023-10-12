@@ -34,7 +34,11 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($service as $item)
-                                        <tr>
+                                        @php
+                                            $cancelled = App\Models\ServiceCancelled::where('id_service', $item->id)->first();
+                                            // dd(Auth::user()->id);
+                                        @endphp
+                                        <tr class="@if ($item->deleted_at != null) table-danger @endif">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 <strong class="text-danger">Rp
@@ -42,7 +46,15 @@
                                                 <br><small>{{ $item->code }}</small>
                                             </td>
                                             <td>{{ $item->date }}</td>
-                                            <td>{{ App\Models\ServiceStatus::getNotifStatus($item->id)->status->status }}
+                                            <td>
+                                                @if ($item->deleted_at == null)
+                                                    {{ App\Models\ServiceStatus::getNotifStatus($item->id)->status->status }}
+                                                @else
+                                                    <strong>Service dibatalkan</strong>
+                                                    <hr class="my-0">
+                                                    <small>{{ $cancelled != null ? $cancelled->keterangan : null }}
+                                                    </small>
+                                                @endif
                                             </td>
                                             <td><a href="{{ url('/member/status', $item->code) }}"
                                                     class="btn btn-info btn-sm">Cek</a></td>

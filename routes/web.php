@@ -11,6 +11,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LayananKonterController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProdukStokController;
 use App\Http\Controllers\PusherController;
@@ -43,6 +44,8 @@ Route::get('/status/{code}', [MemberController::class, 'status'])->name('status'
 Auth::routes(['verify' => true]);
 
 Route::middleware('auth')->group(function () {
+
+    Route::put('/read_notifikasi/{id}', [NotifikasiController::class, 'read_notifikasi'])->name('read_notifikasi');
 
     Route::get('/chat/user/{user}', [App\Http\Controllers\ChatController::class, 'chat'])->name('chat');
     Route::get('/chat/room/{room}', [App\Http\Controllers\ChatController::class, 'room'])->name('chat.room');

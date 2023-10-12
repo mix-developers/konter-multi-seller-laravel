@@ -62,6 +62,7 @@ class Service extends Model
     {
         return self::with(['pelanggan', 'layanan', 'konter'])
             ->where('id_user', Auth::user()->id)
+            ->withTrashed()
             ->get();
     }
 }

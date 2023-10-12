@@ -51,7 +51,7 @@ class MemberController extends Controller
     public function status($code)
     {
 
-        $service = Service::where('code', $code)->first();
+        $service = Service::where('code', $code)->withTrashed()->first();
         $data = [
             'title' => 'Kode service : ' . $service->code,
             'service' => $service,

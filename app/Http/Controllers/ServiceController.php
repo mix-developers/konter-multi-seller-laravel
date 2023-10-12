@@ -248,7 +248,7 @@ class ServiceController extends Controller
             $notifikasi->id_user = $service->id_user;
             $notifikasi->content = 'Hai ' . $service->pelanggan->name . 'Service anda dengan kode : ' . $service->code . ' telah dibatalkan oleh konter';
             $notifikasi->type = 'danger';
-            $notifikasi->url = Url('/member/status_service');
+            $notifikasi->url = '/member/status_service';
             $notifikasi->save();
 
             if ($cancel->save() &&  $service->delete()) {
@@ -321,7 +321,7 @@ class ServiceController extends Controller
             $notifikasi->id_user = $service->id_user;
             $notifikasi->content = 'Hai ' . $service->pelanggan->name . 'Service anda dengan kode : ' . $service->code . ' akan dilanjutkan oleh konter';
             $notifikasi->type = 'success';
-            $notifikasi->url = Url('/member/status_service');
+            $notifikasi->url = '/member/status_service';
             $notifikasi->save();
 
             $service->deleted_at = null;

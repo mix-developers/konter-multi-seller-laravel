@@ -34,7 +34,9 @@
                             @else
                                 <li>
                                     @php
-                                        $notifikasi = App\Models\Notifikasi::where('id_user', Auth::user()->id)->count();
+                                        $notifikasi = App\Models\Notifikasi::where('id_user', Auth::user()->id)
+                                            ->where('is_read', 0)
+                                            ->count();
                                         $service = App\Models\Service::getNotif()->count();
 
                                         if ($notifikasi > 0 && $service > 0) {

@@ -9,17 +9,22 @@
                 </button>
             </div>
             <div class="modal-body ">
-                @if (App\Models\Notifikasi::where('id_user', Auth::user()->id) != null)
-                    @foreach (App\Models\Notifikasi::where('id_user', Auth::user()->id)->get() as $item)
+                @if (App\Models\Notifikasi::where('id_user', Auth::user()->id)->where('is_read', 0) != null)
+                    @foreach (App\Models\Notifikasi::where('id_user', Auth::user()->id)->where('is_read', 0)->get() as $item)
                         <div class="border-{{ $item->type == 'success' ? 'info' : 'danger' }} border my-2"
                             style="border-radius:10px;">
                             <div class="p-2">
-                                <a href="#" style="font-size: 14px;"
-                                    class="text-{{ $item->type == 'success' ? 'info' : 'danger' }}">
-                                    <span>
-                                        {{ Str::limit($item->content, 100) }}
-                                    </span>
-                                </a><br>
+                                <form action="{{ route('read_notifikasi', $item->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" style="font-size: 14px; text-align:left;"
+                                        class="btn btn-light-{{ $item->type == 'success' ? 'info' : 'danger' }} text-{{ $item->type == 'success' ? 'info' : 'danger' }}">
+                                        <span>
+                                            {{ Str::limit($item->content, 100) }}
+                                        </span>
+                                    </button>
+                                </form>
                                 <small>{{ $item->created_at->diffForHumans() }}</small>
                             </div>
                         </div>
@@ -39,10 +44,10 @@
                         Semua Service</a>
                 @endif
             </div>
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
 
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
