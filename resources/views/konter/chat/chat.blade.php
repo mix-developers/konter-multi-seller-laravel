@@ -20,7 +20,7 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-rooms: center;
         }
 
         .main {
@@ -53,15 +53,15 @@
     </style>
 @endpush
 {{-- {{ dd($room_user) }} --}}
-@foreach ($room_user as $item)
-    <div class="tab-pane fade" id="v-pills-{{ $item->chat_room_id }}" role="tabpanel"
-        aria-labelledby="v-pills-{{ $item->chat_room_id }}-tab">
+@foreach ($room_user as $room)
+    <div class="tab-pane fade" id="v-pills-{{ $room->chat_room_id }}" role="tabpanel"
+        aria-labelledby="v-pills-{{ $room->chat_room_id }}-tab">
         <div class="d-flex justify-content-center container ">
             <div class="wrapper">
                 <div class="main">
-                    <div class="px-2 scroll" id="message-{{ $item->chat_room_id }}">
+                    <div class="px-2 scroll" id="message-{{ $room->chat_room_id }}">
                     </div>
-                    <form id="form-{{ $item->chat_room_id }}"
+                    <form id="form-{{ $room->chat_room_id }}"
                         class="navbar bg-white navbar-expand-sm d-flex justify-content-between">
                         <input type="text" name="text" class="form-control" placeholder="Type a message...">
                         <button class="btn btn-success">
@@ -79,7 +79,7 @@
             document.addEventListener('DOMContentLoaded', function() {
                 // Get chat from API
                 const getChat = async () => {
-                    const response = await fetch('/chat/get/{{ $item->chat_room_id }}');
+                    const response = await fetch('/chat/get/{{ $room->chat_room_id }}');
                     const data = await response.json()
 
                     let chatsHTML = '';
@@ -91,7 +91,7 @@
                             minute: 'numeric'
                         });
                         chatsHTML += `
-                            <div class="d-flex align-items-center 
+                            <div class="d-flex align-rooms-center 
                                 ${r.user_id == "{{ Auth::user()->id }}" ? 'text-right justify-content-end' : ''}">
                                 <div class="pr-2 ${r.user_id == "{{ Auth::user()->id }}" ? '' : 'pl-1'}">
                                     <span class="name">${r.user_id == "{{ Auth::user()->id }}" ? 'Anda' : r.user_name} | ${timeString}</span>
@@ -100,10 +100,10 @@
                             </div>`
                     });
 
-                    document.getElementById('message-{{ $item->chat_room_id }}').innerHTML = chatsHTML
+                    document.getElementById('message-{{ $room->chat_room_id }}').innerHTML = chatsHTML
                 }
 
-                const roomId = "{{ $item->chat_room_id }}";
+                const roomId = "{{ $room->chat_room_id }}";
 
                 window.addEventListener('load', async (ev) => {
                     await getChat()

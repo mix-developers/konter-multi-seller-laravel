@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/chat/get/{room}', [App\Http\Controllers\ChatController::class, 'getChat'])->name('chat.get');
     Route::post('/chat/send', [App\Http\Controllers\ChatController::class, 'sendChat'])->name('chat.send');
     Route::put('/chat/readAll/{id}', [App\Http\Controllers\ChatController::class, 'readAll'])->name('chat.readAll');
+    Route::put('/chat/readUser/{chat_room_id}/{id}', [App\Http\Controllers\ChatController::class, 'readUser'])->name('chat.readUser');
 });
 
 // Admin Routes

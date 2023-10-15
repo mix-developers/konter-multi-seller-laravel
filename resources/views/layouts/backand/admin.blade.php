@@ -136,12 +136,18 @@
                         <li class="pc-h-item">
                             <a class="pc-head-link mr-0" href="{{ route('konter.chat') }}" d>
                                 <i data-feather="message-circle" class="text-primary"></i>
-                                @if (App\Models\Chat::getNotif(Auth::user()->id) != null)
-                                    @if (App\Models\Chat::getNotif(Auth::user()->id)->is_read == 0)
-                                        <span class="badge badge-danger pc-h-badge dots"><span
-                                                class="sr-only"></span></span>
-                                    @endif
-                                @endif
+                                @php
+                                    $id_room = App\Models\Chat::where('user_id', Auth::user()->id)->get();
+                                    $idRoom = $id_room->pluck('chat_room_id')->toArray();
+                                    $chatNotRead = App\Models\Chat::where('chat_room_id', $idRoom)
+                                        ->where('is_read', 0)
+                                        ->where('user_id', '!=', Auth::user()->id)
+                                        ->count();
+                                @endphp
+
+                                <span
+                                    class="badge badge-danger pc-h-badge ">{{ $chatNotRead != 0 ? $chatNotRead : null }}</span>
+
                             </a>
                         </li>
                     @endif

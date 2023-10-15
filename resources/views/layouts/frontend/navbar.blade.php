@@ -65,12 +65,13 @@
                                             ->where('user_id', '!=', Auth::user()->id)
                                             ->count();
                                     @endphp
-                                    <a href="#" class=" mr-3" data-toggle="modal" data-target="#message">
+                                    <a href="#" class=" mr-3" data-toggle="modal" data-target="#notif-message">
                                         <i class="fa fa-comment text-info" style="border:0px;">
                                             <span
                                                 class="badge badge-danger position-absolute top-0 end-0  rounded-circle">{{ $chatNotRead != 0 ? $chatNotRead : null }}</span>
                                         </i>
                                     </a>
+
                                 </li>
                                 <li class="">
                                     <a class="btn btn-outline-info" href="{{ url('/member') }}">

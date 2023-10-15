@@ -1,5 +1,6 @@
 <!-- Modal -->
-<div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade message" id="notif-message" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,23 +9,28 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body ">
+            <div class="modal-body">
                 @php
-                    $id_room = App\Models\Chat::where('user_id', Auth::user()->id)->get();
-                    $idRoom = $id_room->pluck('chat_room_id')->toArray();
-                    $chatNotRead = App\Models\Chat::where('chat_room_id', $idRoom)
+                    $id_room1 = App\Models\Chat::where('user_id', Auth::user()->id)->get();
+                    $idRoom1 = $id_room1->pluck('chat_room_id')->toArray();
+                    $chatNotRead1 = App\Models\Chat::where('chat_room_id', $idRoom1)
                         ->where('is_read', 0)
                         ->where('user_id', '!=', Auth::user()->id)
                         ->get();
                 @endphp
-                {{-- {{ dd($chatNotRead) }} --}}
-                @forelse ($chatNotRead as $item)
+
+                @forelse ($chatNotRead1 as $item)
                     <div class="border-info border my-2" style="border-radius:10px;">
                         <div class="p-2">
-                            <a href="{{ url('/chat/room', $item->chat_room_id) }}">
-                                <strong>
-                                    Konter {{ $item->user->name }}
-                                </strong></a><br>
+                            <form action="{{ route('chat.readUser', [$item->chat_room_id, $item->id]) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="btn m-0 p-0">
+                                    <strong>
+                                        Konter {{ $item->user->name }}
+                                    </strong>
+                                </button>
+                            </form>
                             <small class="text-primary">{{ Str::limit($item->message, 50) }}</small>
                             <small class="float-right">{{ $item->created_at->diffForHumans() }}</small>
                         </div>

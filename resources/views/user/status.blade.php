@@ -121,7 +121,7 @@
                         {{ $title }}</h3>
                 @endif
                 <hr>
-                @if (App\Models\ServiceCancelled::where('id_service', $service->id) != null)
+                @if (App\Models\ServiceCancelled::where('id_service', $service->id)->count() != 0)
                     <div class="alert alert-danger" role="alert">
                         Service <b>{{ $service->code }}</b> telah dibatalkan dengan keterangan :
                         {{ App\Models\ServiceCancelled::where('id_service', $service->id)->first()->keterangan }}

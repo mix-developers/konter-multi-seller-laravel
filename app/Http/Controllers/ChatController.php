@@ -146,5 +146,27 @@ class ChatController extends Controller
             }
         }
         return redirect()->back();
+
+        // $room = Chat::where('user_id', $id)->get();
+        // foreach ($room as $r) {
+        //     $chat = Chat::where('chat_room_id', $r->chat_room_id)
+        //         ->where('is_read', 0)
+        //         ->where('user_id', Auth::user()->id)
+        //         ->get();
+        //     foreach ($chat as $item) {
+        //         $chat = Chat::find($item->id);
+        //         $chat->is_read = 1;
+        //         $chat->save();
+        //     }
+        // }
+        return redirect()->back();
+    }
+    public function readUser($chat_room_id, $id)
+    {
+        $chat = Chat::find($id);
+        $chat->is_read = 1;
+        $chat->save();
+
+        return redirect()->to('/chat/room/' . $chat_room_id);
     }
 }
